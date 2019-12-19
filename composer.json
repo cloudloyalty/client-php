@@ -1,0 +1,24 @@
+{
+    "name": "cloudloyalty/client-php",
+    "description": "PHP SDK for CloudLoyalty API",
+    "type": "library",
+    "require": {
+        "jane-php/open-api-runtime": "^5.0"
+    },
+    "require-dev": {
+        "jane-php/open-api": "^5.2",
+        "friendsofphp/php-cs-fixer": "^2.16"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dev Team",
+            "email": "sipport@cloudloaylty.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "CloudLoyalty\\Api\\": "generated/"
+        }
+    }
+}
