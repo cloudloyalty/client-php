@@ -18,19 +18,19 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class ClientInfoNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class ClientInfoQueryNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
 
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'CloudLoyalty\\Api\\Model\\ClientInfo';
+        return $type === 'CloudLoyalty\\Api\\Model\\ClientInfoQuery';
     }
 
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'CloudLoyalty\\Api\\Model\\ClientInfo';
+        return is_object($data) && get_class($data) === 'CloudLoyalty\\Api\\Model\\ClientInfoQuery';
     }
 
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -38,13 +38,7 @@ class ClientInfoNormalizer implements DenormalizerInterface, NormalizerInterface
         if (!is_object($data)) {
             throw new InvalidArgumentException();
         }
-        $object = new \CloudLoyalty\Api\Model\ClientInfo();
-        if (property_exists($data, 'bonuses')) {
-            $object->setBonuses($data->{'bonuses'});
-        }
-        if (property_exists($data, 'pendingBonuses')) {
-            $object->setPendingBonuses($data->{'pendingBonuses'});
-        }
+        $object = new \CloudLoyalty\Api\Model\ClientInfoQuery();
         if (property_exists($data, 'phoneNumber')) {
             $object->setPhoneNumber($data->{'phoneNumber'});
         }
@@ -72,9 +66,6 @@ class ClientInfoNormalizer implements DenormalizerInterface, NormalizerInterface
         if (property_exists($data, 'card')) {
             $object->setCard($data->{'card'});
         }
-        if (property_exists($data, 'cardString')) {
-            $object->setCardString($data->{'cardString'});
-        }
         if (property_exists($data, 'isEmailSubscribed')) {
             $object->setIsEmailSubscribed($data->{'isEmailSubscribed'});
         }
@@ -97,7 +88,7 @@ class ClientInfoNormalizer implements DenormalizerInterface, NormalizerInterface
         if (property_exists($data, 'children')) {
             $values_1 = [];
             foreach ($data->{'children'} as $value_1) {
-                $values_1[] = $this->denormalizer->denormalize($value_1, 'CloudLoyalty\\Api\\Model\\ClientInfoChildrenItem', 'json', $context);
+                $values_1[] = $this->denormalizer->denormalize($value_1, 'CloudLoyalty\\Api\\Model\\ClientInfoQueryChildrenItem', 'json', $context);
             }
             $object->setChildren($values_1);
         }
@@ -108,12 +99,6 @@ class ClientInfoNormalizer implements DenormalizerInterface, NormalizerInterface
     public function normalize($object, $format = null, array $context = [])
     {
         $data = new \stdClass();
-        if (null !== $object->getBonuses()) {
-            $data->{'bonuses'} = $object->getBonuses();
-        }
-        if (null !== $object->getPendingBonuses()) {
-            $data->{'pendingBonuses'} = $object->getPendingBonuses();
-        }
         if (null !== $object->getPhoneNumber()) {
             $data->{'phoneNumber'} = $object->getPhoneNumber();
         }
@@ -140,9 +125,6 @@ class ClientInfoNormalizer implements DenormalizerInterface, NormalizerInterface
         }
         if (null !== $object->getCard()) {
             $data->{'card'} = $object->getCard();
-        }
-        if (null !== $object->getCardString()) {
-            $data->{'cardString'} = $object->getCardString();
         }
         if (null !== $object->getIsEmailSubscribed()) {
             $data->{'isEmailSubscribed'} = $object->getIsEmailSubscribed();

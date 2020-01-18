@@ -18,19 +18,19 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class ClientInfoChildrenItemNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class ClientInfoQueryChildrenItemNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
 
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'CloudLoyalty\\Api\\Model\\ClientInfoChildrenItem';
+        return $type === 'CloudLoyalty\\Api\\Model\\ClientInfoQueryChildrenItem';
     }
 
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'CloudLoyalty\\Api\\Model\\ClientInfoChildrenItem';
+        return is_object($data) && get_class($data) === 'CloudLoyalty\\Api\\Model\\ClientInfoQueryChildrenItem';
     }
 
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -38,7 +38,7 @@ class ClientInfoChildrenItemNormalizer implements DenormalizerInterface, Normali
         if (!is_object($data)) {
             throw new InvalidArgumentException();
         }
-        $object = new \CloudLoyalty\Api\Model\ClientInfoChildrenItem();
+        $object = new \CloudLoyalty\Api\Model\ClientInfoQueryChildrenItem();
         if (property_exists($data, 'name')) {
             $object->setName($data->{'name'});
         }

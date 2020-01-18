@@ -18,19 +18,19 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class GetBalancePostResponse200Normalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class NewClientPostResponse200Normalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
 
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'CloudLoyalty\\Api\\Model\\GetBalancePostResponse200';
+        return $type === 'CloudLoyalty\\Api\\Model\\NewClientPostResponse200';
     }
 
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'CloudLoyalty\\Api\\Model\\GetBalancePostResponse200';
+        return is_object($data) && get_class($data) === 'CloudLoyalty\\Api\\Model\\NewClientPostResponse200';
     }
 
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -38,7 +38,7 @@ class GetBalancePostResponse200Normalizer implements DenormalizerInterface, Norm
         if (!is_object($data)) {
             throw new InvalidArgumentException();
         }
-        $object = new \CloudLoyalty\Api\Model\GetBalancePostResponse200();
+        $object = new \CloudLoyalty\Api\Model\NewClientPostResponse200();
         if (property_exists($data, 'client')) {
             $object->setClient($this->denormalizer->denormalize($data->{'client'}, 'CloudLoyalty\\Api\\Model\\ClientInfoReply', 'json', $context));
         }

@@ -18,19 +18,19 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class GetBalancePostResponse200BonusesItemNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class ClientBonusExpirationItemNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
 
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'CloudLoyalty\\Api\\Model\\GetBalancePostResponse200BonusesItem';
+        return $type === 'CloudLoyalty\\Api\\Model\\ClientBonusExpirationItem';
     }
 
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'CloudLoyalty\\Api\\Model\\GetBalancePostResponse200BonusesItem';
+        return is_object($data) && get_class($data) === 'CloudLoyalty\\Api\\Model\\ClientBonusExpirationItem';
     }
 
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -38,7 +38,7 @@ class GetBalancePostResponse200BonusesItemNormalizer implements DenormalizerInte
         if (!is_object($data)) {
             throw new InvalidArgumentException();
         }
-        $object = new \CloudLoyalty\Api\Model\GetBalancePostResponse200BonusesItem();
+        $object = new \CloudLoyalty\Api\Model\ClientBonusExpirationItem();
         if (property_exists($data, 'amount')) {
             $object->setAmount($data->{'amount'});
         }

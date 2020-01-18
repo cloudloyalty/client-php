@@ -73,6 +73,18 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
     }
 
     /**
+     * Создает бонусный счет клиента для последующего начисления и списания бонусов.
+     *
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @return \CloudLoyalty\Api\Model\NewClientPostResponse200|\Psr\Http\Message\ResponseInterface|null
+     */
+    public function postNewClient(\CloudLoyalty\Api\Model\NewClientPostBody $requestBody, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executePsr7Endpoint(new \CloudLoyalty\Api\Endpoint\PostNewClient($requestBody), $fetch);
+    }
+
+    /**
      * Создает заказ.
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)

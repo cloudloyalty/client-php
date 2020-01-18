@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace CloudLoyalty\Api\Model;
 
-class GetBalancePostResponse200BonusesItem
+class ClientBonusExpirationItem
 {
     /**
      * Количество бонусов.

@@ -32,9 +32,12 @@ class NormalizerFactory
         $normalizers[] = new CalculationResultPromocodeNormalizer();
         $normalizers[] = new ErrorNormalizer();
         $normalizers[] = new ClientBonusesNormalizer();
-        $normalizers[] = new ClientInfoNormalizer();
-        $normalizers[] = new ClientInfoChildrenItemNormalizer();
+        $normalizers[] = new ClientInfoQueryNormalizer();
+        $normalizers[] = new ClientInfoQueryChildrenItemNormalizer();
+        $normalizers[] = new ClientInfoReplyNormalizer();
+        $normalizers[] = new ClientInfoReplyChildrenItemNormalizer();
         $normalizers[] = new OperationResultNormalizer();
+        $normalizers[] = new ClientBonusExpirationItemNormalizer();
         $normalizers[] = new V2CalculatePurchasePostBodyNormalizer();
         $normalizers[] = new V2CalculatePurchasePostResponse200Normalizer();
         $normalizers[] = new SetPurchasePostBodyNormalizer();
@@ -44,7 +47,8 @@ class NormalizerFactory
         $normalizers[] = new DiscardTicketPostBodyNormalizer();
         $normalizers[] = new DiscardTicketPostResponse200Normalizer();
         $normalizers[] = new GetBalancePostResponse200Normalizer();
-        $normalizers[] = new GetBalancePostResponse200BonusesItemNormalizer();
+        $normalizers[] = new NewClientPostBodyNormalizer();
+        $normalizers[] = new NewClientPostResponse200Normalizer();
         $normalizers[] = new SetOrderPostBodyNormalizer();
         $normalizers[] = new SetOrderPostBodyOrderNormalizer();
         $normalizers[] = new SetOrderPostBodyOrderLoyaltyNormalizer();

@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace CloudLoyalty\Api\Model;
 
-class ClientInfo
+class ClientInfoReply
 {
     /**
      * Баланс доступных бонусов.
@@ -132,7 +132,7 @@ class ClientInfo
     protected $level;
 
     /**
-     * @var ClientInfoChildrenItem[]
+     * @var ClientInfoReplyChildrenItem[]
      */
     protected $children;
 
@@ -447,7 +447,7 @@ class ClientInfo
     }
 
     /**
-     * @return ClientInfoChildrenItem[]
+     * @return ClientInfoReplyChildrenItem[]
      */
     public function getChildren(): array
     {
@@ -455,7 +455,7 @@ class ClientInfo
     }
 
     /**
-     * @param ClientInfoChildrenItem[] $children
+     * @param ClientInfoReplyChildrenItem[] $children
      */
     public function setChildren(array $children): self
     {

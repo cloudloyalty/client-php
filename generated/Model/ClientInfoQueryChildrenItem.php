@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace CloudLoyalty\Api\Model;
 
-class ClientInfoChildrenItem
+class ClientInfoQueryChildrenItem
 {
     /**
      * Имя ребенка.
