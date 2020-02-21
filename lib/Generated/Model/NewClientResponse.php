@@ -8,7 +8,7 @@
 
 namespace CloudLoyalty\Api\Generated\Model;
 
-class GetBalancePostResponse200
+class NewClientResponse
 {
     /**
      * Информация о клиенте

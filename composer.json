@@ -3,7 +3,8 @@
     "description": "PHP SDK for CloudLoyalty API",
     "type": "library",
     "require": {
-        "jane-php/open-api-runtime": "^5.0"
+        "php": ">= 5.4",
+        "ext-json": "*"
     },
     "require-dev": {
         "jane-php/open-api": "^5.2",
@@ -18,7 +19,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "CloudLoyalty\\Api\\": "lib/"
+            "CloudLoyalty\\Api\\": "lib/",
+            "Tools\\": "tools/"
         }
     }
 }
