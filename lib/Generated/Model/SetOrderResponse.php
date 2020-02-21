@@ -8,7 +8,7 @@
 
 namespace CloudLoyalty\Api\Generated\Model;
 
-class ConfirmOrderPostResponse200
+class SetOrderResponse
 {
     /**
      * 
@@ -23,13 +23,6 @@ class ConfirmOrderPostResponse200
      * @var ClientBonuses
      */
     protected $clientBonuses;
-
-    /**
-     * Ошибка
-     *
-     * @var Error
-     */
-    protected $error;
 
     /**
      * 
@@ -74,29 +67,6 @@ class ConfirmOrderPostResponse200
     public function setClientBonuses(ClientBonuses $clientBonuses)
     {
         $this->clientBonuses = $clientBonuses;
-        return $this;
-    }
-
-    /**
-     * Ошибка
-     *
-     * @return Error
-     */
-    public function getError()
-    {
-        return $this->error;
-    }
-
-    /**
-     * Ошибка
-     *
-     * @param Error $error
-     *
-     * @return self
-     */
-    public function setError(Error $error)
-    {
-        $this->error = $error;
         return $this;
     }
 }

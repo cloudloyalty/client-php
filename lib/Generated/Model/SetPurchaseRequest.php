@@ -8,7 +8,7 @@
 
 namespace CloudLoyalty\Api\Generated\Model;
 
-class DiscardTicketPostBody
+class SetPurchaseRequest
 {
     /**
      * Идентификатор транзакции
@@ -18,11 +18,11 @@ class DiscardTicketPostBody
     protected $txid;
 
     /**
-     * Тикет, выданный после предварительного создания продажи
+     * Данные чека или заказа для расчета
      *
-     * @var string
+     * @var CalculationQuery
      */
-    protected $ticket;
+    protected $calculationQuery;
 
     /**
      * Идентификатор транзакции
@@ -48,25 +48,25 @@ class DiscardTicketPostBody
     }
 
     /**
-     * Тикет, выданный после предварительного создания продажи
+     * Данные чека или заказа для расчета
      *
-     * @return string
+     * @return CalculationQuery
      */
-    public function getTicket()
+    public function getCalculationQuery()
     {
-        return $this->ticket;
+        return $this->calculationQuery;
     }
 
     /**
-     * Тикет, выданный после предварительного создания продажи
+     * Данные чека или заказа для расчета
      *
-     * @param string $ticket
+     * @param CalculationQuery $calculationQuery
      *
      * @return self
      */
-    public function setTicket($ticket)
+    public function setCalculationQuery(CalculationQuery $calculationQuery)
     {
-        $this->ticket = $ticket;
+        $this->calculationQuery = $calculationQuery;
         return $this;
     }
 }

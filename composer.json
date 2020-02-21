@@ -8,7 +8,8 @@
     },
     "require-dev": {
         "jane-php/open-api": "^5.2",
-        "friendsofphp/php-cs-fixer": "^2.16"
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpunit/phpunit": "^9.0"
     },
     "license": "MIT",
     "authors": [
@@ -20,7 +21,8 @@
     "autoload": {
         "psr-4": {
             "CloudLoyalty\\Api\\": "lib/",
-            "Tools\\": "tools/"
+            "Tools\\": "tools/",
+            "Tests\\": "tests/"
         }
     }
 }

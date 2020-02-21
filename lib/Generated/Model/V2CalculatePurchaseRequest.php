@@ -8,7 +8,7 @@
 
 namespace CloudLoyalty\Api\Generated\Model;
 
-class V2CalculatePurchasePostBody
+class V2CalculatePurchaseRequest
 {
     /**
      * Данные чека или заказа для расчета

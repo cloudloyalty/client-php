@@ -20,7 +20,7 @@ class ClientInfoQueryChildrenItem
     /**
      * Дата или день рождения
      *
-     * @var string
+     * @var \DateTime
      */
     protected $birthdate;
 
@@ -63,7 +63,7 @@ class ClientInfoQueryChildrenItem
     /**
      * Дата или день рождения
      *
-     * @return string
+     * @return \DateTime
      */
     public function getBirthdate()
     {
@@ -73,11 +73,11 @@ class ClientInfoQueryChildrenItem
     /**
      * Дата или день рождения
      *
-     * @param string $birthdate
+     * @param \DateTime $birthdate
      *
      * @return self
      */
-    public function setBirthdate($birthdate)
+    public function setBirthdate(\DateTime $birthdate)
     {
         $this->birthdate = $birthdate;
         return $this;

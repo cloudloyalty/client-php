@@ -8,7 +8,7 @@
 
 namespace CloudLoyalty\Api\Generated\Model;
 
-class SetPurchasePostResponse200
+class SetPurchaseResponse
 {
     /**
      * Состояние бонусного счета клиента после операции
@@ -32,13 +32,6 @@ class SetPurchasePostResponse200
      * @var string
      */
     protected $ticket;
-
-    /**
-     * Ошибка
-     *
-     * @var Error
-     */
-    protected $error;
 
     /**
      * Состояние бонусного счета клиента после операции
@@ -110,29 +103,6 @@ class SetPurchasePostResponse200
     public function setTicket($ticket)
     {
         $this->ticket = $ticket;
-        return $this;
-    }
-
-    /**
-     * Ошибка
-     *
-     * @return Error
-     */
-    public function getError()
-    {
-        return $this->error;
-    }
-
-    /**
-     * Ошибка
-     *
-     * @param Error $error
-     *
-     * @return self
-     */
-    public function setError(Error $error)
-    {
-        $this->error = $error;
         return $this;
     }
 }

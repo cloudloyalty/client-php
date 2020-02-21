@@ -8,7 +8,7 @@
 
 namespace CloudLoyalty\Api\Generated\Model;
 
-class ConfirmTicketPostBody
+class ConfirmTicketRequest
 {
     /**
      * Идентификатор транзакции

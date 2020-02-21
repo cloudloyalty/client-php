@@ -2,7 +2,19 @@
 
 namespace CloudLoyalty\Api;
 
-use CloudLoyalty\Api\Generated\Model\Error;
+use CloudLoyalty\Api\Generated\Model\CancelOrderResponse;
+use CloudLoyalty\Api\Generated\Model\CancelOrderRequest;
+use CloudLoyalty\Api\Generated\Model\ClientQuery;
+use CloudLoyalty\Api\Generated\Model\ConfirmOrderResponse;
+use CloudLoyalty\Api\Generated\Model\ConfirmOrderRequest;
+use CloudLoyalty\Api\Generated\Model\ConfirmTicketRequest;
+use CloudLoyalty\Api\Generated\Model\DiscardTicketRequest;
+use CloudLoyalty\Api\Generated\Model\GetBalanceResponse;
+use CloudLoyalty\Api\Generated\Model\ProcessingError;
+use CloudLoyalty\Api\Generated\Model\SetOrderResponse;
+use CloudLoyalty\Api\Generated\Model\SetOrderRequest;
+use CloudLoyalty\Api\Generated\Model\SetPurchaseResponse;
+use CloudLoyalty\Api\Generated\Model\SetPurchaseRequest;
 use CloudLoyalty\Api\Http\Request;
 use CloudLoyalty\Api\Exception\ProcessingException;
 use CloudLoyalty\Api\Exception\TransportException;
@@ -17,6 +29,24 @@ class Client
 {
     const DEFAULT_SERVER_ADDRESS = 'api.cloudloyalty.ru';
     const TEST_SERVER_ADDRESS = 'api-test.cloudloyalty.ru';
+
+    public static $arrayElementsHint = [
+        'CloudLoyalty\Api\Generated\Model\CalculationResult' => [
+            'rows' => 'CloudLoyalty\Api\Generated\Model\CalculationResultRow'
+        ],
+        'CloudLoyalty\Api\Generated\Model\CalculationResultRow' => [
+            'offers' => 'CloudLoyalty\Api\Generated\Model\CalculationResultRowOffersItem'
+        ],
+        'CloudLoyalty\Api\Generated\Model\ClientInfoReply' => [
+            'children' => 'CloudLoyalty\Api\Generated\Model\ClientInfoReplyChildrenItem'
+        ],
+        'CloudLoyalty\Api\Generated\Model\GetBalanceResponse' => [
+            'bonuses' => 'CloudLoyalty\Api\Generated\Model\ClientBonusExpirationItem'
+        ],
+        'CloudLoyalty\Api\Generated\Model\NewClientResponse' => [
+            'bonuses' => 'CloudLoyalty\Api\Generated\Model\ClientBonusExpirationItem'
+        ],
+    ];
 
     /**
      * @var ClientInterface
@@ -55,7 +85,7 @@ class Client
         }
         $this->httpClient = $httpClient;
         if ($serializer === null) {
-            $serializer = new Serializer();
+            $serializer = new Serializer(self::$arrayElementsHint);
         }
         $this->serializer = $serializer;
     }
@@ -126,6 +156,83 @@ class Client
     }
 
     /**
+     * @param ClientQuery $request
+     * @return GetBalanceResponse
+     * @throws ProcessingException
+     * @throws TransportException
+     */
+    public function getBalance(ClientQuery $request)
+    {
+        return $this->call('get-balance', $request, 'CloudLoyalty\Api\Generated\Model\GetBalanceResponse');
+    }
+
+    /**
+     * @param SetPurchaseRequest $request
+     * @return SetPurchaseResponse
+     * @throws ProcessingException
+     * @throws TransportException
+     */
+    public function setPurchase(SetPurchaseRequest $request)
+    {
+        return $this->call('set-purchase', $request, 'CloudLoyalty\Api\Generated\Model\SetPurchaseResponse');
+    }
+
+    /**
+     * @param ConfirmTicketRequest $request
+     * @return \stdClass
+     * @throws ProcessingException
+     * @throws TransportException
+     */
+    public function confirmTicket(ConfirmTicketRequest $request)
+    {
+        return $this->call('confirm-ticket', $request, 'stdClass');
+    }
+
+    /**
+     * @param DiscardTicketRequest $request
+     * @return \stdClass
+     * @throws ProcessingException
+     * @throws TransportException
+     */
+    public function discardTicket(DiscardTicketRequest $request)
+    {
+        return $this->call('discard-ticket', $request, 'stdClass');
+    }
+
+    /**
+     * @param SetOrderRequest $request
+     * @return SetOrderResponse
+     * @throws ProcessingException
+     * @throws TransportException
+     */
+    public function setOrder(SetOrderRequest $request)
+    {
+        return $this->call('set-order', $request, 'CloudLoyalty\Api\Generated\Model\SetOrderResponse');
+    }
+
+    /**
+     * @param ConfirmOrderRequest $request
+     * @return ConfirmOrderResponse
+     * @throws ProcessingException
+     * @throws TransportException
+     */
+    public function confirmOrder(ConfirmOrderRequest $request)
+    {
+        return $this->call('confirm-order', $request, 'CloudLoyalty\Api\Generated\Model\ConfirmOrderResponse');
+    }
+
+    /**
+     * @param CancelOrderRequest $request
+     * @return CancelOrderResponse
+     * @throws ProcessingException
+     * @throws TransportException
+     */
+    public function cancelOrder(CancelOrderRequest $request)
+    {
+        return $this->call('cancel-order', $request, 'CloudLoyalty\Api\Generated\Model\CancelOrderResponse');
+    }
+
+    /**
      * @param string $method
      * @param mixed $request
      * @param string $responseType
@@ -135,10 +242,10 @@ class Client
     protected function call($method, $request, $responseType)
     {
         $response = $this->sendRawRequest($method, $this->serializer->toJson($request));
-        /** @var Error $error */
-        $error = $this->serializer->fromJson($response, 'CloudLoyalty\Api\Generated\Model\Error');
-        if ($error->getCode()) {
-            throw new ProcessingException($error->getDescription(), $error->getCode(), $error->getHint());
+        /** @var ProcessingError $error */
+        $error = $this->serializer->fromJson($response, 'CloudLoyalty\Api\Generated\Model\ProcessingError');
+        if ($error && $error->getErrorCode()) {
+            throw new ProcessingException($error->getDescription(), $error->getErrorCode(), $error->getHint());
         }
         return $this->serializer->fromJson($response, $responseType);
     }

@@ -23,7 +23,7 @@ class ClientInfoReplyChildrenItem
      * Если год рождения неизвестен, возвращается 1900.
      *
      *
-     * @var string
+     * @var \DateTime
      */
     protected $birthdate;
 
@@ -69,7 +69,7 @@ class ClientInfoReplyChildrenItem
      * Если год рождения неизвестен, возвращается 1900.
      *
      *
-     * @return string
+     * @return \DateTime
      */
     public function getBirthdate()
     {
@@ -82,11 +82,11 @@ class ClientInfoReplyChildrenItem
      * Если год рождения неизвестен, возвращается 1900.
      *
      *
-     * @param string $birthdate
+     * @param \DateTime $birthdate
      *
      * @return self
      */
-    public function setBirthdate($birthdate)
+    public function setBirthdate(\DateTime $birthdate)
     {
         $this->birthdate = $birthdate;
         return $this;

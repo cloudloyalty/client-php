@@ -8,7 +8,7 @@
 
 namespace CloudLoyalty\Api\Generated\Model;
 
-class V2CalculatePurchasePostResponse200
+class V2CalculatePurchaseResponse
 {
     /**
      * Результат расчета
@@ -16,13 +16,6 @@ class V2CalculatePurchasePostResponse200
      * @var CalculationResult
      */
     protected $calculationResult;
-
-    /**
-     * Ошибка
-     *
-     * @var Error
-     */
-    protected $error;
 
     /**
      * Результат расчета
@@ -44,29 +37,6 @@ class V2CalculatePurchasePostResponse200
     public function setCalculationResult(CalculationResult $calculationResult)
     {
         $this->calculationResult = $calculationResult;
-        return $this;
-    }
-
-    /**
-     * Ошибка
-     *
-     * @return Error
-     */
-    public function getError()
-    {
-        return $this->error;
-    }
-
-    /**
-     * Ошибка
-     *
-     * @param Error $error
-     *
-     * @return self
-     */
-    public function setError(Error $error)
-    {
-        $this->error = $error;
         return $this;
     }
 }

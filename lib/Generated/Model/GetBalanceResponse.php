@@ -8,7 +8,7 @@
 
 namespace CloudLoyalty\Api\Generated\Model;
 
-class GetBalancePostResponse200
+class GetBalanceResponse
 {
     /**
      * Информация о клиенте
@@ -33,13 +33,6 @@ class GetBalancePostResponse200
      * @var ClientBonusExpirationItem[]
      */
     protected $bonuses;
-
-    /**
-     * Ошибка
-     *
-     * @var Error
-     */
-    protected $error;
 
     /**
      * Информация о клиенте
@@ -113,29 +106,6 @@ class GetBalancePostResponse200
     public function setBonuses(array $bonuses)
     {
         $this->bonuses = $bonuses;
-        return $this;
-    }
-
-    /**
-     * Ошибка
-     *
-     * @return Error
-     */
-    public function getError()
-    {
-        return $this->error;
-    }
-
-    /**
-     * Ошибка
-     *
-     * @param Error $error
-     *
-     * @return self
-     */
-    public function setError(Error $error)
-    {
-        $this->error = $error;
         return $this;
     }
 }

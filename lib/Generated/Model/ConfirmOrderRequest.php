@@ -8,17 +8,17 @@
 
 namespace CloudLoyalty\Api\Generated\Model;
 
-class CancelOrderPostBody
+class ConfirmOrderRequest
 {
     /**
-     * Идентификатор заказа
+     * Идентификатор заказа для подтверждения
      *
      * @var string
      */
     protected $orderId;
 
     /**
-     * Дата операции.
+     * Дата операции подтверждения.
      *
      * Если не задана, считается равной текущим дате и времени.
      *
@@ -28,7 +28,7 @@ class CancelOrderPostBody
     protected $executedAt;
 
     /**
-     * Идентификатор заказа
+     * Идентификатор заказа для подтверждения
      *
      * @return string
      */
@@ -38,7 +38,7 @@ class CancelOrderPostBody
     }
 
     /**
-     * Идентификатор заказа
+     * Идентификатор заказа для подтверждения
      *
      * @param string $orderId
      *
@@ -51,7 +51,7 @@ class CancelOrderPostBody
     }
 
     /**
-     * Дата операции.
+     * Дата операции подтверждения.
      *
      * Если не задана, считается равной текущим дате и времени.
      *
@@ -64,7 +64,7 @@ class CancelOrderPostBody
     }
 
     /**
-     * Дата операции.
+     * Дата операции подтверждения.
      *
      * Если не задана, считается равной текущим дате и времени.
      *

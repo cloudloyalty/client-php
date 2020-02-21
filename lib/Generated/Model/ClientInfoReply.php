@@ -127,7 +127,7 @@ class ClientInfoReply
     /**
      * Дополнительные параметры клиента
      *
-     * @var mixed[]
+     * @var mixed
      */
     protected $extraFields;
 
@@ -511,7 +511,7 @@ class ClientInfoReply
     /**
      * Дополнительные параметры клиента
      *
-     * @return mixed[]
+     * @return mixed
      */
     public function getExtraFields()
     {
@@ -521,11 +521,11 @@ class ClientInfoReply
     /**
      * Дополнительные параметры клиента
      *
-     * @param mixed[] $extraFields
+     * @param mixed $extraFields
      *
      * @return self
      */
-    public function setExtraFields(\ArrayObject $extraFields)
+    public function setExtraFields($extraFields)
     {
         $this->extraFields = $extraFields;
         return $this;

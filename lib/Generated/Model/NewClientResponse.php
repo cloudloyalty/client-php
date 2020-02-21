@@ -35,13 +35,6 @@ class NewClientResponse
     protected $bonuses;
 
     /**
-     * Ошибка
-     *
-     * @var Error
-     */
-    protected $error;
-
-    /**
      * Информация о клиенте
      *
      * @return ClientInfoReply
@@ -113,29 +106,6 @@ class NewClientResponse
     public function setBonuses(array $bonuses)
     {
         $this->bonuses = $bonuses;
-        return $this;
-    }
-
-    /**
-     * Ошибка
-     *
-     * @return Error
-     */
-    public function getError()
-    {
-        return $this->error;
-    }
-
-    /**
-     * Ошибка
-     *
-     * @param Error $error
-     *
-     * @return self
-     */
-    public function setError(Error $error)
-    {
-        $this->error = $error;
         return $this;
     }
 }
