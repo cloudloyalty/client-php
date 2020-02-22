@@ -7,9 +7,10 @@
         "ext-json": "*"
     },
     "require-dev": {
-        "jane-php/open-api": "^5.2",
         "friendsofphp/php-cs-fixer": "^2.16",
-        "phpunit/phpunit": "^9.0"
+        "phpunit/phpunit": "^9.0",
+        "jane-php/open-api-3": "^5.3",
+        "guzzlehttp/guzzle": "^6.5"
     },
     "license": "MIT",
     "authors": [

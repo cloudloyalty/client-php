@@ -15,6 +15,8 @@ use CloudLoyalty\Api\Generated\Model\SetOrderResponse;
 use CloudLoyalty\Api\Generated\Model\SetOrderRequest;
 use CloudLoyalty\Api\Generated\Model\SetPurchaseResponse;
 use CloudLoyalty\Api\Generated\Model\SetPurchaseRequest;
+use CloudLoyalty\Api\Generated\Model\V2CalculatePurchaseRequest;
+use CloudLoyalty\Api\Generated\Model\V2CalculatePurchaseResponse;
 use CloudLoyalty\Api\Http\Request;
 use CloudLoyalty\Api\Exception\ProcessingException;
 use CloudLoyalty\Api\Exception\TransportException;
@@ -164,6 +166,17 @@ class Client
     public function getBalance(ClientQuery $request)
     {
         return $this->call('get-balance', $request, 'CloudLoyalty\Api\Generated\Model\GetBalanceResponse');
+    }
+
+    /**
+     * @param V2CalculatePurchaseRequest $request
+     * @return V2CalculatePurchaseResponse
+     * @throws ProcessingException
+     * @throws TransportException
+     */
+    public function CalculatePurchaseV2(V2CalculatePurchaseRequest $request)
+    {
+        return $this->call('v2/calculate-purchase', $request, 'CloudLoyalty\Api\Generated\Model\V2CalculatePurchaseRequest');
     }
 
     /**
