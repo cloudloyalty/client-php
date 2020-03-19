@@ -38,7 +38,7 @@ class NativeClient implements ClientInterface
         $context = stream_context_create([
             'http' => [
                 'method' => $request->getMethod(),
-                'header' => $request->getHeaders(),
+                'header' => $this->joinHeaders($request->getHeaders()),
                 'content' => $request->getBody(),
                 'follow_location' => 0,
                 'protocol_version' => 1.1,
@@ -69,5 +69,15 @@ class NativeClient implements ClientInterface
             ->setReasonPhrase($reasonPhrase)
             ->setHeaders($headers)
             ->setBody($body ?: '');
+    }
+
+    private function joinHeaders($headers)
+    {
+        $joinedHeaders = [];
+        foreach ($headers as $key => $value) {
+            // FIXME: should it be encoded somehow?
+            $joinedHeaders[] = $key . ': ' . $value;
+        }
+        return $joinedHeaders;
     }
 }
