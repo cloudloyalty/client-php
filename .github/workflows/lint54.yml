@@ -1,0 +1,23 @@
+name: Lint PHP 5.4
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '5.4'
+
+    - name: Lint
+      run: find lib/ -name \*.php -exec sh -c 'php -l "$0" || kill $PPID' \{\} \;
