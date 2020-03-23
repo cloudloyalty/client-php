@@ -15,11 +15,9 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install PHP
-      uses: shivammathur/setup-php@1.7.0
+      uses: shivammathur/setup-php@v2
       with:
         php-version: '5.4'
-
-    - run: php --version
 
     - name: Lint
       run: find lib/ -name \*.php -exec sh -c 'php -l "$0" || kill $PPID' \{\} \;
