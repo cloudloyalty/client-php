@@ -2,6 +2,16 @@
 
 namespace CloudLoyalty\Api;
 
+use CloudLoyalty\Api\Generated\Model\AdjustBalanceRequest;
+use CloudLoyalty\Api\Generated\Model\AdjustBalanceResponse;
+use CloudLoyalty\Api\Generated\Model\ApplyReturnRequest;
+use CloudLoyalty\Api\Generated\Model\ApplyReturnResponse;
+use CloudLoyalty\Api\Generated\Model\GetHistoryRequest;
+use CloudLoyalty\Api\Generated\Model\GetHistoryResponse;
+use CloudLoyalty\Api\Generated\Model\IssuePromocodeRequest;
+use CloudLoyalty\Api\Generated\Model\IssuePromocodeResponse;
+use CloudLoyalty\Api\Generated\Model\NewClientRequest;
+use CloudLoyalty\Api\Generated\Model\NewClientResponse;
 use CloudLoyalty\Api\Generated\Model\CancelOrderResponse;
 use CloudLoyalty\Api\Generated\Model\CancelOrderRequest;
 use CloudLoyalty\Api\Generated\Model\ClientQuery;
@@ -10,22 +20,23 @@ use CloudLoyalty\Api\Generated\Model\ConfirmOrderRequest;
 use CloudLoyalty\Api\Generated\Model\ConfirmTicketRequest;
 use CloudLoyalty\Api\Generated\Model\DiscardTicketRequest;
 use CloudLoyalty\Api\Generated\Model\GetBalanceResponse;
-use CloudLoyalty\Api\Generated\Model\ProcessingError;
+use CloudLoyalty\Api\Generated\Model\SendConfirmationCodeRequest;
+use CloudLoyalty\Api\Generated\Model\SendConfirmationCodeResponse;
 use CloudLoyalty\Api\Generated\Model\SetOrderResponse;
 use CloudLoyalty\Api\Generated\Model\SetOrderRequest;
 use CloudLoyalty\Api\Generated\Model\SetPurchaseResponse;
 use CloudLoyalty\Api\Generated\Model\SetPurchaseRequest;
+use CloudLoyalty\Api\Generated\Model\UpdateClientRequest;
 use CloudLoyalty\Api\Generated\Model\V2CalculatePurchaseRequest;
 use CloudLoyalty\Api\Generated\Model\V2CalculatePurchaseResponse;
 use CloudLoyalty\Api\Http\Request;
 use CloudLoyalty\Api\Exception\ProcessingException;
 use CloudLoyalty\Api\Exception\TransportException;
-use CloudLoyalty\Api\Generated\Model\NewClientRequest;
-use CloudLoyalty\Api\Generated\Model\NewClientResponse;
 use CloudLoyalty\Api\Http\ClientInterface;
 use CloudLoyalty\Api\Http\Client\NativeClient;
 use CloudLoyalty\Api\Serializer\Serializer;
 use CloudLoyalty\Api\Serializer\SerializerInterface;
+use CloudLoyalty\Api\Model\ProcessingError;
 
 class Client
 {
@@ -169,12 +180,67 @@ class Client
     }
 
     /**
+     * @param UpdateClientRequest $request
+     * @return NewClientResponse
+     * @throws ProcessingException
+     * @throws TransportException
+     */
+    public function updateClient(UpdateClientRequest $request)
+    {
+        return $this->call('update-client', $request, 'CloudLoyalty\Api\Generated\Model\NewClientResponse');
+    }
+
+    /**
+     * @param SendConfirmationCodeRequest $request
+     * @return SendConfirmationCodeResponse
+     * @throws ProcessingException
+     * @throws TransportException
+     */
+    public function sendConfirmationCode(SendConfirmationCodeRequest $request)
+    {
+        return $this->call('send-confirmation-code', $request, 'CloudLoyalty\Api\Generated\Model\SendConfirmationCodeResponse');
+    }
+
+    /**
+     * @param GetHistoryRequest $request
+     * @return GetHistoryResponse
+     * @throws ProcessingException
+     * @throws TransportException
+     */
+    public function getHistory(GetHistoryRequest $request)
+    {
+        return $this->call('get-history', $request, 'CloudLoyalty\Api\Generated\Model\GetHistoryResponse');
+    }
+
+    /**
+     * @param AdjustBalanceRequest $request
+     * @return AdjustBalanceResponse
+     * @throws ProcessingException
+     * @throws TransportException
+     */
+    public function adjustBalance(AdjustBalanceRequest $request)
+    {
+        return $this->call('adjust-balance', $request, 'CloudLoyalty\Api\Generated\Model\AdjustBalanceResponse');
+    }
+
+    /**
+     * @param IssuePromocodeRequest $request
+     * @return IssuePromocodeResponse
+     * @throws ProcessingException
+     * @throws TransportException
+     */
+    public function issuePromocode(IssuePromocodeRequest $request)
+    {
+        return $this->call('issue-promocode', $request, 'CloudLoyalty\Api\Generated\Model\IssuePromocodeResponse');
+    }
+
+    /**
      * @param V2CalculatePurchaseRequest $request
      * @return V2CalculatePurchaseResponse
      * @throws ProcessingException
      * @throws TransportException
      */
-    public function CalculatePurchaseV2(V2CalculatePurchaseRequest $request)
+    public function calculatePurchase(V2CalculatePurchaseRequest $request)
     {
         return $this->call('v2/calculate-purchase', $request, 'CloudLoyalty\Api\Generated\Model\V2CalculatePurchaseRequest');
     }
@@ -210,6 +276,17 @@ class Client
     public function discardTicket(DiscardTicketRequest $request)
     {
         return $this->call('discard-ticket', $request, 'stdClass');
+    }
+
+    /**
+     * @param ApplyReturnRequest $request
+     * @return ApplyReturnResponse
+     * @throws ProcessingException
+     * @throws TransportException
+     */
+    public function applyReturn(ApplyReturnRequest $request)
+    {
+        return $this->call('apply-return', $request, 'CloudLoyalty\Api\Generated\Model\ApplyReturnResponse');
     }
 
     /**
@@ -256,7 +333,7 @@ class Client
     {
         $response = $this->sendRawRequest($method, $this->serializer->toJson($request));
         /** @var ProcessingError $error */
-        $error = $this->serializer->fromJson($response, 'CloudLoyalty\Api\Generated\Model\ProcessingError');
+        $error = $this->serializer->fromJson($response, 'CloudLoyalty\Api\Model\ProcessingError');
         if ($error && $error->getErrorCode()) {
             throw new ProcessingException($error->getDescription(), $error->getErrorCode(), $error->getHint());
         }

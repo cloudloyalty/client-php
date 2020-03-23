@@ -22,7 +22,8 @@ class Serializer implements SerializerInterface
      */
     public function fromJson($json, $className)
     {
-        $a = json_decode($json, true);;
+        assert(class_exists($className), "Class $className must exist");
+        $a = json_decode($json, true);
         if (!is_array($a)) {
             return null;
         }

@@ -27,7 +27,7 @@ class Error
     /**
      * Детали ошибки
      *
-     * @var string|null
+     * @var string
      */
     protected $hint;
 
@@ -80,7 +80,7 @@ class Error
     /**
      * Детали ошибки
      *
-     * @return string|null
+     * @return string
      */
     public function getHint()
     {
@@ -90,7 +90,7 @@ class Error
     /**
      * Детали ошибки
      *
-     * @param string|null $hint
+     * @param string $hint
      *
      * @return self
      */
