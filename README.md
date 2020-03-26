@@ -1,5 +1,5 @@
-# client-php
-PHP SDK для CloudLoyalty API _Beta_
+# client-php _β_
+PHP SDK для CloudLoyalty API
 
 ![Run tests](https://github.com/cloudloyalty/client-php/workflows/Run%20tests/badge.svg)
 
@@ -26,3 +26,8 @@ $apiClient->setProcessingKey('<ваш_ключ>')
             ->setReceiptNum($txid)
     );
 ```
+
+### Статус бибилиотеки
+Могут буть незначительные недоработки.
+
+Все замечания направляйте на [support@cloudloyalty.ru](mailto:support@cloudloyalty.ru) или в Telegram @livinbelievin.
