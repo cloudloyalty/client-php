@@ -10,7 +10,7 @@ use CloudLoyalty\Api\Exception\TransportException;
 
 class NativeClient implements ClientInterface
 {
-    const DEFAULT_TIMEOUT = 2; // seconds
+    const DEFAULT_TIMEOUT = 5; // seconds
 
     /**
      * @var float
@@ -46,11 +46,25 @@ class NativeClient implements ClientInterface
             ]
         ]);
 
-        $body = file_get_contents($request->getUri(), false, $context);
+        error_clear_last();
+        $http_response_header = null;
+
+        $body = @file_get_contents($request->getUri(), false, $context);
+
+        // For codes 200-399 file_get_contents returns the body
+        // For codes 400-599 body is always false, $http_response_header is set, error_get_last() will return details
+        // Networking errors don't set $http_response_header, error_get_last() will return details
+
+        // A networking error
+        if (is_null($http_response_header)) {
+            $error = error_get_last();
+            throw new TransportException($error['message'], $error['type']);
+        }
 
         $statusLine = array_shift($http_response_header);
         list($_, $statusCode, $reasonPhrase) = explode(' ', $statusLine);
 
+        // 400-599 codes
         if ($body === false) {
             throw new TransportException(
                 'HTTP request finished with status ' . $statusCode . ' ' . $reasonPhrase,
