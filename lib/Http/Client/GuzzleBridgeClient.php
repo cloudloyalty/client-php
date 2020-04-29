@@ -47,6 +47,6 @@ class GuzzleBridgeClient implements ClientInterface
             ->setStatusCode($response->getStatusCode())
             ->setReasonPhrase($response->getReasonPhrase())
             ->setHeaders($response->getHeaders())
-            ->setBody($response->getBody()->getContents());
+            ->setBody((string) $response->getBody());
     }
 }
