@@ -242,7 +242,7 @@ class Client
      */
     public function calculatePurchase(V2CalculatePurchaseRequest $request)
     {
-        return $this->call('v2/calculate-purchase', $request, 'CloudLoyalty\Api\Generated\Model\V2CalculatePurchaseRequest');
+        return $this->call('v2/calculate-purchase', $request, 'CloudLoyalty\Api\Generated\Model\V2CalculatePurchaseResponse');
     }
 
     /**

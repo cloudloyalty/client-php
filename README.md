@@ -30,4 +30,4 @@ $apiClient->setProcessingKey('<ваш_ключ>')
 ### Статус бибилиотеки
 Могут буть незначительные недоработки.
 
-Все замечания направляйте на [support@cloudloyalty.ru](mailto:support@cloudloyalty.ru) или в Telegram @livinbelievin.
+Обо всех обнаруженных проблемах сообщайте в [Issues](https://github.com/cloudloyalty/client-php/issues).
