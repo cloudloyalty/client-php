@@ -8,6 +8,8 @@ use CloudLoyalty\Api\Generated\Model\ApplyReturnRequest;
 use CloudLoyalty\Api\Generated\Model\ApplyReturnResponse;
 use CloudLoyalty\Api\Generated\Model\GetHistoryRequest;
 use CloudLoyalty\Api\Generated\Model\GetHistoryResponse;
+use CloudLoyalty\Api\Generated\Model\GetSettingsRequest;
+use CloudLoyalty\Api\Generated\Model\GetSettingsResponse;
 use CloudLoyalty\Api\Generated\Model\IssuePromocodeRequest;
 use CloudLoyalty\Api\Generated\Model\IssuePromocodeResponse;
 use CloudLoyalty\Api\Generated\Model\NewClientRequest;
@@ -320,6 +322,17 @@ class Client
     public function cancelOrder(CancelOrderRequest $request)
     {
         return $this->call('cancel-order', $request, 'CloudLoyalty\Api\Generated\Model\CancelOrderResponse');
+    }
+
+    /**
+     * @param GetSettingsRequest $request
+     * @return GetSettingsResponse
+     * @throws ProcessingException
+     * @throws TransportException
+     */
+    public function getSettings(GetSettingsRequest $request)
+    {
+        return $this->call('get-settings', $request, 'CloudLoyalty\Api\Generated\Model\GetSettingsResponse');
     }
 
     /**

@@ -34,6 +34,13 @@ class SetPurchaseResponse
     protected $ticket;
 
     /**
+     * Информация для печати на чеке
+     *
+     * @var SetPurchaseResponseReceiptInfoItem[]
+     */
+    protected $receiptInfo;
+
+    /**
      * Состояние бонусного счета клиента после операции
      *
      * @return ClientBonuses
@@ -103,6 +110,29 @@ class SetPurchaseResponse
     public function setTicket($ticket)
     {
         $this->ticket = $ticket;
+        return $this;
+    }
+
+    /**
+     * Информация для печати на чеке
+     *
+     * @return SetPurchaseResponseReceiptInfoItem[]
+     */
+    public function getReceiptInfo()
+    {
+        return $this->receiptInfo;
+    }
+
+    /**
+     * Информация для печати на чеке
+     *
+     * @param SetPurchaseResponseReceiptInfoItem[] $receiptInfo
+     *
+     * @return self
+     */
+    public function setReceiptInfo(array $receiptInfo)
+    {
+        $this->receiptInfo = $receiptInfo;
         return $this;
     }
 }

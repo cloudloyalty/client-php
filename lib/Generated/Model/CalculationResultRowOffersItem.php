@@ -32,6 +32,20 @@ class CalculationResultRowOffersItem
     protected $name;
 
     /**
+     * Начисленные по акции бонусы
+     *
+     * @var int
+     */
+    protected $bonuses;
+
+    /**
+     * Скидка по акции
+     *
+     * @var float
+     */
+    protected $amount;
+
+    /**
      * Внутренний идентификатор акции
      *
      * @return int
@@ -97,6 +111,52 @@ class CalculationResultRowOffersItem
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Начисленные по акции бонусы
+     *
+     * @return int
+     */
+    public function getBonuses()
+    {
+        return $this->bonuses;
+    }
+
+    /**
+     * Начисленные по акции бонусы
+     *
+     * @param int $bonuses
+     *
+     * @return self
+     */
+    public function setBonuses($bonuses)
+    {
+        $this->bonuses = $bonuses;
+        return $this;
+    }
+
+    /**
+     * Скидка по акции
+     *
+     * @return float
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Скидка по акции
+     *
+     * @param float $amount
+     *
+     * @return self
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
         return $this;
     }
 }

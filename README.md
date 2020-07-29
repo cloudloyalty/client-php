@@ -16,15 +16,29 @@ composer require cloudloyalty/client-php
 ### Пример кода
 #### Используется встроенный в библиотеку HTTP-клиент
 ```php
-$apiClient = new \CloudLoyalty\Api\Client();
+use CloudLoyalty\Api\Client;
+use CloudLoyalty\Api\Generated\Model\ConfirmTicketRequest;
+use CloudLoyalty\Api\Exception\TransportException;
+use CloudLoyalty\Api\Exception\ProcessingException;
 
-$apiClient->setProcessingKey('<ваш_ключ>')
-    ->confirmTicket(
+$apiClient = (new Client())
+    ->setProcessingKey('<ваш_ключ>');
+
+try {
+    $result = $apiClient->confirmTicket(
         (new ConfirmTicketRequest())
             ->setTxid($txid)
             ->setTicket($ticket)
             ->setReceiptNum($txid)
     );
+} catch (TransportException $e) {
+    // ошибка обмена с сервером
+} catch (ProcessingException $e) {
+    // ошибка обработки запроса сервером
+    // $e->getCode() - код
+    // $e->getDescriptionRus() - описание ошибки
+    // $e->getHint() - детали ошибки
+}
 ```
 
 ### Статус бибилиотеки
