@@ -1,4 +1,4 @@
-# client-php _β_
+# client-php
 PHP SDK для CloudLoyalty API
 
 ![Run tests](https://github.com/cloudloyalty/client-php/workflows/Run%20tests/badge.svg)
@@ -11,6 +11,15 @@ PHP SDK для CloudLoyalty API
 #### Используется composer
 ```bash
 composer require cloudloyalty/client-php
+```
+
+#### Вручную
+
+1. Скачайте [архив](https://github.com/cloudloyalty/client-php/archive/master.zip),
+   распакуйте его и скопируйте каталог lib в нужное место в вашем проекте.
+2. В коде вашего проекта подключите автозагрузку файлов нашего клиента:
+```php
+require __DIR__ . '/lib/autoload.php';
 ```
 
 ### Пример кода
@@ -41,7 +50,15 @@ try {
 }
 ```
 
+#### Используется созданный ранее клиент Guzzle
+
+```
+$apiClient = (new Client())
+    ->setHttpClient(new GuzzleBridgeClient($yourGuzzleClient))
+    ->setProcessingKey('<ваш_ключ>');
+```
+
 ### Статус бибилиотеки
-Могут буть незначительные недоработки.
+Готова к использованию.
 
 Обо всех обнаруженных проблемах сообщайте в [Issues](https://github.com/cloudloyalty/client-php/issues).

@@ -62,7 +62,8 @@ class Serializer implements SerializerInterface
             case "object":
                 // Some known classes
                 // json_encode does encode dates well by itself
-                if ($value instanceof \DateTimeInterface) {
+                // \DateTimeInterface is available since 5.5
+                if ($value instanceof \DateTime || $value instanceof \DateTimeInterface) {
                     return $value->format(DATE_RFC3339);
                 }
                 // explicit null
@@ -187,7 +188,12 @@ class Serializer implements SerializerInterface
             $params = $method->getParameters();
             if ($params && $params[0]->getClass()) {
                 // Some known classes
-                if ($params[0]->getClass()->implementsInterface('DateTimeInterface')) {
+                if (
+                    $params[0]->getClass()->getName() === 'DateTime'
+                    || $params[0]->getClass()->isSubclassOf('DateTime')
+                    // \DateTimeInterface available since 5.5
+                    || $params[0]->getClass()->implementsInterface('DateTimeInterface')
+                ) {
                     $value = \DateTime::createFromFormat(\DATE_RFC3339, $value);
                 } else {
                     $classHint = $params[0]->getClass()->getName();
