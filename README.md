@@ -23,15 +23,20 @@ require __DIR__ . '/lib/autoload.php';
 ```
 
 ### Пример кода
-#### Используется встроенный в библиотеку HTTP-клиент
 ```php
 use CloudLoyalty\Api\Client;
 use CloudLoyalty\Api\Generated\Model\ConfirmTicketRequest;
 use CloudLoyalty\Api\Exception\TransportException;
 use CloudLoyalty\Api\Exception\ProcessingException;
 
+// Используется встроенный в библиотеку HTTP-клиент
 $apiClient = (new Client())
     ->setProcessingKey('<ваш_ключ>');
+
+// Используется созданный ранее клиент Guzzle
+//$apiClient = (new Client())
+//    ->setHttpClient(new GuzzleBridgeClient($yourGuzzleClient))
+//    ->setProcessingKey('<ваш_ключ>');
 
 try {
     $result = $apiClient->confirmTicket(
@@ -41,21 +46,13 @@ try {
             ->setReceiptNum($txid)
     );
 } catch (TransportException $e) {
-    // ошибка обмена с сервером
+    // Ошибка обмена с сервером
 } catch (ProcessingException $e) {
-    // ошибка обработки запроса сервером
+    // Ошибка обработки запроса сервером
     // $e->getCode() - код
     // $e->getDescriptionRus() - описание ошибки
     // $e->getHint() - детали ошибки
 }
-```
-
-#### Используется созданный ранее клиент Guzzle
-
-```
-$apiClient = (new Client())
-    ->setHttpClient(new GuzzleBridgeClient($yourGuzzleClient))
-    ->setProcessingKey('<ваш_ключ>');
 ```
 
 ### Статус бибилиотеки
