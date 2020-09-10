@@ -194,7 +194,7 @@ class Serializer implements SerializerInterface
                     // \DateTimeInterface available since 5.5
                     || $params[0]->getClass()->implementsInterface('DateTimeInterface')
                 ) {
-                    $value = \DateTime::createFromFormat(\DATE_RFC3339, $value);
+                    $value = new \DateTime($value);
                 } else {
                     $classHint = $params[0]->getClass()->getName();
                     $value = $this->deserializeObject($value, $classHint);

@@ -141,6 +141,17 @@ class SerializerTest extends TestCase
                     ),
             ],
 
+            // DateTime (date only)
+            [
+                '{"client":{"birthdate":"1986-01-01"}}',
+                'CloudLoyalty\Api\Generated\Model\NewClientResponse',
+                (new NewClientResponse())
+                    ->setClient(
+                        (new ClientInfoReply())
+                            ->setBirthdate(new \DateTime('1986-01-01T00:00:00+03:00'))
+                    ),
+            ],
+
             // An array
             [
                 '{"client":{"children":[{"name":"Аня","birthdate":"1986-01-01T00:00:00+03:00"},'
