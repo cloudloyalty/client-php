@@ -5,7 +5,7 @@ generate:
 	rm -rf lib/Generated/Authentication lib/Generated/Endpoint lib/Generated/Normalizer lib/Generated/Client.php
 
 test:
-	@./vendor/bin/phpunit tests/ --colors=always
+	@./vendor/bin/phpunit -d date.timezone=Europe/Moscow tests/ --colors=always
 
 # vim: noexpandtab
 
