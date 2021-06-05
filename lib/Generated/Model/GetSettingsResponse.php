@@ -25,7 +25,7 @@ class GetSettingsResponse
     protected $bonusApplyingConfirmation;
 
     /**
-     * Нужно ли отображать поле Карта
+     * Требовать ли обязательного заполнения номера карты
      *
      * @var bool
      */
@@ -116,7 +116,7 @@ class GetSettingsResponse
     }
 
     /**
-     * Нужно ли отображать поле Карта
+     * Требовать ли обязательного заполнения номера карты
      *
      * @return bool
      */
@@ -126,7 +126,7 @@ class GetSettingsResponse
     }
 
     /**
-     * Нужно ли отображать поле Карта
+     * Требовать ли обязательного заполнения номера карты
      *
      * @param bool $clientFieldCardRequired
      *

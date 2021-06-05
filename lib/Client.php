@@ -24,13 +24,13 @@ use CloudLoyalty\Api\Generated\Model\DiscardTicketRequest;
 use CloudLoyalty\Api\Generated\Model\GetBalanceResponse;
 use CloudLoyalty\Api\Generated\Model\SendConfirmationCodeRequest;
 use CloudLoyalty\Api\Generated\Model\SendConfirmationCodeResponse;
-use CloudLoyalty\Api\Generated\Model\SetOrderResponse;
-use CloudLoyalty\Api\Generated\Model\SetOrderRequest;
 use CloudLoyalty\Api\Generated\Model\SetPurchaseResponse;
 use CloudLoyalty\Api\Generated\Model\SetPurchaseRequest;
 use CloudLoyalty\Api\Generated\Model\UpdateClientRequest;
 use CloudLoyalty\Api\Generated\Model\V2CalculatePurchaseRequest;
 use CloudLoyalty\Api\Generated\Model\V2CalculatePurchaseResponse;
+use CloudLoyalty\Api\Generated\Model\V2SetOrderRequest;
+use CloudLoyalty\Api\Generated\Model\V2SetOrderResponse;
 use CloudLoyalty\Api\Http\Request;
 use CloudLoyalty\Api\Exception\ProcessingException;
 use CloudLoyalty\Api\Exception\TransportException;
@@ -321,14 +321,14 @@ class Client
     }
 
     /**
-     * @param SetOrderRequest $request
-     * @return SetOrderResponse
+     * @param V2SetOrderRequest $request
+     * @return V2SetOrderResponse
      * @throws ProcessingException
      * @throws TransportException
      */
-    public function setOrder(SetOrderRequest $request)
+    public function setOrder(V2SetOrderRequest $request)
     {
-        return $this->call('set-order', $request, 'CloudLoyalty\Api\Generated\Model\SetOrderResponse');
+        return $this->call('v2/set-order', $request, 'CloudLoyalty\Api\Generated\Model\V2SetOrderResponse');
     }
 
     /**
