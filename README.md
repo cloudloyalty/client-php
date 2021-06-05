@@ -1,5 +1,5 @@
 # client-php
-PHP SDK для CloudLoyalty API
+PHP SDK для MAXMA API
 
 ![Run tests](https://github.com/cloudloyalty/client-php/workflows/Run%20tests/badge.svg)
 
@@ -50,7 +50,7 @@ try {
 } catch (ProcessingException $e) {
     // Ошибка обработки запроса сервером
     // $e->getCode() - код
-    // $e->getDescriptionRus() - описание ошибки
+    // $e->getDescription() - описание ошибки
     // $e->getHint() - детали ошибки
 }
 ```

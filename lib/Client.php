@@ -42,8 +42,11 @@ use CloudLoyalty\Api\Model\ProcessingError;
 
 class Client
 {
-    const DEFAULT_SERVER_ADDRESS = 'api.cloudloyalty.ru';
-    const TEST_SERVER_ADDRESS = 'api-test.cloudloyalty.ru';
+    const DEFAULT_SERVER_ADDRESS = 'api.maxma.com';
+    const TEST_SERVER_ADDRESS = 'api-test.maxma.com';
+
+    const ACCEPT_LANGUAGE_RU = 'ru';
+    const ACCEPT_LANGUAGE_EN = 'en';
 
     public static $arrayElementsHint = [
         'CloudLoyalty\Api\Generated\Model\CalculationResult' => [
@@ -83,6 +86,11 @@ class Client
      */
     protected $processingKey;
 
+    /**
+     * @var string
+     */
+    protected $acceptLanguage = self::ACCEPT_LANGUAGE_RU;
+
 
     public function __construct(
         array $config = [],
@@ -94,6 +102,9 @@ class Client
         }
         if (isset($config['processingKey'])) {
             $this->setProcessingKey($config['processingKey']);
+        }
+        if (isset($config['acceptLanguage'])) {
+            $this->setAcceptLanguage($config['acceptLanguage']);
         }
         if ($httpClient === null) {
             $httpClient = new NativeClient();
@@ -156,6 +167,24 @@ class Client
     public function setServerAddress($serverAddress)
     {
         $this->serverAddress = trim($serverAddress, '/');
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAcceptLanguage()
+    {
+        return $this->acceptLanguage;
+    }
+
+    /**
+     * @param string $acceptLanguage
+     * @return Client
+     */
+    public function setAcceptLanguage($acceptLanguage)
+    {
+        $this->acceptLanguage = $acceptLanguage;
         return $this;
     }
 
@@ -387,6 +416,7 @@ class Client
                 'X-Processing-Key' => $this->processingKey,
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
+                'Accept-Language' => $this->acceptLanguage,
             ])
             ->setBody($rawBody);
     }

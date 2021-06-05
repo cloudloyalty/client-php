@@ -24,11 +24,12 @@ class ClientTest extends TestCase
             ->with($this->equalTo(
                 (new Request())
                     ->setMethod('POST')
-                    ->setUri('https://api.cloudloyalty.ru/new-client')
+                    ->setUri('https://api.maxma.com/new-client')
                     ->setHeaders([
                         'Content-Type' => 'application/json',
                         'Accept' => 'application/json',
-                        'X-Processing-Key' => 'test-key'
+                        'X-Processing-Key' => 'test-key',
+                        'Accept-Language' => 'ru'
                     ])
                     ->setBody('{"client":{"name":"Name"}}')
             ))
