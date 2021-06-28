@@ -11,32 +11,110 @@ namespace CloudLoyalty\Api\Generated\Model;
 class SendConfirmationCodeResponse
 {
     /**
-     * 
+     * Cгенерированный проверочный код.
      *
-     * @var SendConfirmationCodeResponseResult
+     * Содержит три цифры, могут быть лидирующие нули.
+     *
+     *
+     * @var string
      */
-    protected $result;
+    protected $code;
 
     /**
-     * 
+     * Идентификатор отправленного клиенту сообщения
      *
-     * @return SendConfirmationCodeResponseResult
+     * @var string
      */
-    public function getResult()
+    protected $msgid;
+
+    /**
+     * Дата и время, до которых высланный код считается действующим.
+     *
+     * После наступления указанного времени кодом воспользоваться уже будет нельзя.
+     *
+     *
+     * @var \DateTime
+     */
+    protected $expiresAt;
+
+    /**
+     * Cгенерированный проверочный код.
+     *
+     * Содержит три цифры, могут быть лидирующие нули.
+     *
+     *
+     * @return string
+     */
+    public function getCode()
     {
-        return $this->result;
+        return $this->code;
     }
 
     /**
-     * 
+     * Cгенерированный проверочный код.
      *
-     * @param SendConfirmationCodeResponseResult $result
+     * Содержит три цифры, могут быть лидирующие нули.
+     *
+     *
+     * @param string $code
      *
      * @return self
      */
-    public function setResult(SendConfirmationCodeResponseResult $result)
+    public function setCode($code)
     {
-        $this->result = $result;
+        $this->code = $code;
+        return $this;
+    }
+
+    /**
+     * Идентификатор отправленного клиенту сообщения
+     *
+     * @return string
+     */
+    public function getMsgid()
+    {
+        return $this->msgid;
+    }
+
+    /**
+     * Идентификатор отправленного клиенту сообщения
+     *
+     * @param string $msgid
+     *
+     * @return self
+     */
+    public function setMsgid($msgid)
+    {
+        $this->msgid = $msgid;
+        return $this;
+    }
+
+    /**
+     * Дата и время, до которых высланный код считается действующим.
+     *
+     * После наступления указанного времени кодом воспользоваться уже будет нельзя.
+     *
+     *
+     * @return \DateTime
+     */
+    public function getExpiresAt()
+    {
+        return $this->expiresAt;
+    }
+
+    /**
+     * Дата и время, до которых высланный код считается действующим.
+     *
+     * После наступления указанного времени кодом воспользоваться уже будет нельзя.
+     *
+     *
+     * @param \DateTime $expiresAt
+     *
+     * @return self
+     */
+    public function setExpiresAt(\DateTime $expiresAt)
+    {
+        $this->expiresAt = $expiresAt;
         return $this;
     }
 }

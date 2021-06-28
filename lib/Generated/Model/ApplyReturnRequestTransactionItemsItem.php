@@ -18,35 +18,11 @@ class ApplyReturnRequestTransactionItemsItem
     protected $sku;
 
     /**
-     * Название товара
-     *
-     * @var string
-     */
-    protected $itemTitle;
-
-    /**
      * Количество товара в чеке
      *
      * @var float
      */
     protected $itemCount;
-
-    /**
-     * Цена единицы товара
-     *
-     * @var float
-     */
-    protected $price;
-
-    /**
-     * Сумма по строке.
-     *
-     * Если не указана, рассчитывается как price * itemCount.
-     *
-     *
-     * @var float
-     */
-    protected $amount;
 
     /**
      * Артикул или другой номенклатурный идентификатор товара для возврата
@@ -72,29 +48,6 @@ class ApplyReturnRequestTransactionItemsItem
     }
 
     /**
-     * Название товара
-     *
-     * @return string
-     */
-    public function getItemTitle()
-    {
-        return $this->itemTitle;
-    }
-
-    /**
-     * Название товара
-     *
-     * @param string $itemTitle
-     *
-     * @return self
-     */
-    public function setItemTitle($itemTitle)
-    {
-        $this->itemTitle = $itemTitle;
-        return $this;
-    }
-
-    /**
      * Количество товара в чеке
      *
      * @return float
@@ -114,58 +67,6 @@ class ApplyReturnRequestTransactionItemsItem
     public function setItemCount($itemCount)
     {
         $this->itemCount = $itemCount;
-        return $this;
-    }
-
-    /**
-     * Цена единицы товара
-     *
-     * @return float
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * Цена единицы товара
-     *
-     * @param float $price
-     *
-     * @return self
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-        return $this;
-    }
-
-    /**
-     * Сумма по строке.
-     *
-     * Если не указана, рассчитывается как price * itemCount.
-     *
-     *
-     * @return float
-     */
-    public function getAmount()
-    {
-        return $this->amount;
-    }
-
-    /**
-     * Сумма по строке.
-     *
-     * Если не указана, рассчитывается как price * itemCount.
-     *
-     *
-     * @param float $amount
-     *
-     * @return self
-     */
-    public function setAmount($amount)
-    {
-        $this->amount = $amount;
         return $this;
     }
 }

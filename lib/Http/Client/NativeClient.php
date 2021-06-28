@@ -46,7 +46,6 @@ class NativeClient implements ClientInterface
             ]
         ]);
 
-        error_clear_last();
         $http_response_header = null;
 
         $body = @file_get_contents($request->getUri(), false, $context);
