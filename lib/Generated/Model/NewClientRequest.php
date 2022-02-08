@@ -32,6 +32,13 @@ class NewClientRequest
     protected $cashier;
 
     /**
+     * Промокод "Приведи друга"
+     *
+     * @var string
+     */
+    protected $promocode;
+
+    /**
      * Информация о клиенте
      *
      * @return ClientInfoQuery
@@ -97,6 +104,29 @@ class NewClientRequest
     public function setCashier(CashierQuery $cashier)
     {
         $this->cashier = $cashier;
+        return $this;
+    }
+
+    /**
+     * Промокод "Приведи друга"
+     *
+     * @return string
+     */
+    public function getPromocode()
+    {
+        return $this->promocode;
+    }
+
+    /**
+     * Промокод "Приведи друга"
+     *
+     * @param string $promocode
+     *
+     * @return self
+     */
+    public function setPromocode($promocode)
+    {
+        $this->promocode = $promocode;
         return $this;
     }
 }

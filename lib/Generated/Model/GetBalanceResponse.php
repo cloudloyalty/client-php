@@ -35,6 +35,13 @@ class GetBalanceResponse
     protected $bonuses;
 
     /**
+     * Информация об уровне клиента
+     *
+     * @var ClientLevel
+     */
+    protected $level;
+
+    /**
      * Информация о клиенте
      *
      * @return ClientInfoReply
@@ -106,6 +113,29 @@ class GetBalanceResponse
     public function setBonuses(array $bonuses)
     {
         $this->bonuses = $bonuses;
+        return $this;
+    }
+
+    /**
+     * Информация об уровне клиента
+     *
+     * @return ClientLevel
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * Информация об уровне клиента
+     *
+     * @param ClientLevel $level
+     *
+     * @return self
+     */
+    public function setLevel(ClientLevel $level)
+    {
+        $this->level = $level;
         return $this;
     }
 }
