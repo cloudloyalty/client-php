@@ -2,7 +2,7 @@
 
 namespace CloudLoyalty\Api\Http;
 
-class Request implements RequestInterface, \JsonSerializable
+class Request implements RequestInterface
 {
     /**
      * @var string
@@ -95,18 +95,5 @@ class Request implements RequestInterface, \JsonSerializable
     {
         $this->body = $body;
         return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function jsonSerialize()
-    {
-        return [
-            'method' => $this->getMethod(),
-            'uri' => $this->getUri(),
-            'headers' => $this->getHeaders(),
-            'body' => $this->getBody(),
-        ];
     }
 }

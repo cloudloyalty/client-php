@@ -192,9 +192,11 @@ class Client
      */
     public function setServerAddress($serverAddress)
     {
-        $scheme = parse_url($this->serverAddress, PHP_URL_SCHEME);
-        $scheme = $scheme ? $scheme . '://' : 'https://';
-        $this->serverAddress = $scheme . trim($serverAddress, '/');
+        $scheme = parse_url($serverAddress, PHP_URL_SCHEME);
+        if (!$scheme) {
+            $serverAddress = 'https://' . $serverAddress;
+        }
+        $this->serverAddress = rtrim($serverAddress, '/');
         return $this;
     }
 
@@ -423,8 +425,18 @@ class Client
 
         if ($this->logger instanceof LoggerInterface) {
             $this->logger->debug('Request', [
-                'request' => $request,
-                'response' => $response,
+                'request' => [
+                    'method' => $request->getMethod(),
+                    'uri' => $request->getUri(),
+                    'headers' => $request->getHeaders(),
+                    'body' => $request->getBody(),
+                ],
+                'response' => [
+                    'statusCode' => $response->getStatusCode(),
+                    'reasonPhrase' => $response->getReasonPhrase(),
+                    'headers' => $response->getHeaders(),
+                    'body' => $response->getBody(),
+                ],
             ]);
         }
 
