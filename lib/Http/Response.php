@@ -2,7 +2,7 @@
 
 namespace CloudLoyalty\Api\Http;
 
-class Response implements ResponseInterface
+class Response implements ResponseInterface, \JsonSerializable
 {
     /**
      * @var int
@@ -95,5 +95,18 @@ class Response implements ResponseInterface
     {
         $this->body = $body;
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'statusCode' => $this->getStatusCode(),
+            'reasonPhrase' => $this->getReasonPhrase(),
+            'headers' => $this->getHeaders(),
+            'body' => $this->getBody(),
+        ];
     }
 }
