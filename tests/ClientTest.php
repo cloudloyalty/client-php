@@ -137,13 +137,27 @@ class ClientTest extends TestCase
         $apiClient->setServerAddress('api.someotherhost.com');
         $apiClient->setProcessingKey('test-key');
 
-        $apiClient->newClient(
-            (new NewClientRequest())
-                ->setClient(
-                    (new ClientInfoQuery())
-                        ->setName('Name')
-                )
-        );
+        $apiClient->newClient(new NewClientRequest());
+    }
+
+    public function testNewClientWhenCustomServerAddressWithSchemeSpecified()
+    {
+        $httpClientMock = $this->createMock('CloudLoyalty\Api\Http\Client\NativeClient');
+
+        $httpClientMock->expects($this->once())
+            ->method('sendRequest')
+            ->with($this->callback(function (Request $request) {
+                $this->assertEquals('ftp://api.someotherhost.com/new-client', $request->getUri());
+
+                return true;
+            }))
+            ->willReturn(new Response());
+
+        $apiClient = new Client([], $httpClientMock);
+        $apiClient->setServerAddress('ftp://api.someotherhost.com');
+        $apiClient->setProcessingKey('test-key');
+
+        $apiClient->newClient(new NewClientRequest());
     }
 
     public function testNewClientWhenPsrLoggerProvided()
