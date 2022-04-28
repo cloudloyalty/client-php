@@ -1,6 +1,7 @@
 <?php
 
 return PhpCsFixer\Config::create()
+    ->setRiskyAllowed(true)
     ->setRules([
         'CL/remove_type_hint' => true,
         'return_type_declaration' => [
