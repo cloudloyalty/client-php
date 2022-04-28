@@ -12,7 +12,8 @@
         "jane-php/open-api-3": "^7.2",
         "guzzlehttp/guzzle": "^7.4",
         "symfony/translation-contracts": "^2.5",
-        "psr/log": "^1.1"
+        "psr/log": "^1.1",
+        "guzzlehttp/psr7": "^2.2"
     },
     "license": "MIT",
     "authors": [
