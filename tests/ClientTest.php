@@ -11,6 +11,7 @@ use CloudLoyalty\Api\Generated\Model\NewClientRequest;
 use CloudLoyalty\Api\Generated\Model\NewClientResponse;
 use CloudLoyalty\Api\Http\Request;
 use CloudLoyalty\Api\Http\Response;
+use CloudLoyalty\Api\Logger\PsrBridgeLogger;
 use PHPUnit\Framework\TestCase;
 
 class ClientTest extends TestCase
@@ -109,6 +110,81 @@ class ClientTest extends TestCase
             'Internal Server Error',
             500
         ));
+
+        $apiClient->newClient(
+            (new NewClientRequest())
+                ->setClient(
+                    (new ClientInfoQuery())
+                        ->setName('Name')
+                )
+        );
+    }
+
+    public function testNewClientWhenCustomServerAddressSpecified()
+    {
+        $httpClientMock = $this->createMock('CloudLoyalty\Api\Http\Client\NativeClient');
+
+        $httpClientMock->expects($this->once())
+            ->method('sendRequest')
+            ->with($this->callback(function (Request $request) {
+                $this->assertEquals('https://api.someotherhost.com/new-client', $request->getUri());
+
+                return true;
+            }))
+            ->willReturn(new Response());
+
+        $apiClient = new Client([], $httpClientMock);
+        $apiClient->setServerAddress('api.someotherhost.com');
+        $apiClient->setProcessingKey('test-key');
+
+        $apiClient->newClient(
+            (new NewClientRequest())
+                ->setClient(
+                    (new ClientInfoQuery())
+                        ->setName('Name')
+                )
+        );
+    }
+
+    public function testNewClientWhenPsrLoggerProvided()
+    {
+        $httpClientMock = $this->createMock('CloudLoyalty\Api\Http\Client\NativeClient');
+        $httpClientMock->expects($this->once())
+            ->method('sendRequest')
+            ->willReturn(
+                (new Response())
+                    ->setStatusCode(200)
+                    ->setReasonPhrase('OK')
+                    ->setHeaders(['Content-Type' => 'application/json'])
+                    ->setBody('{"success":true}')
+            );
+
+        $loggerMock = $this->createMock('Psr\Log\LoggerInterface');
+        $loggerMock->expects($this->once())
+            ->method('debug')
+            ->with(
+                $this->equalTo('Request'),
+                $this->callback(function (array $context) {
+                    $this->assertEquals(
+                        '{"method":"POST","uri":"https:\/\/api.maxma.com\/new-client",' .
+                        '"headers":{"X-Processing-Key":"test-key","Content-Type":"application\/json",' .
+                        '"Accept":"application\/json","Accept-Language":"ru"},' .
+                        '"body":"{\"client\":{\"name\":\"Name\"}}"}',
+                        json_encode($context['request'])
+                    );
+                    $this->assertEquals(
+                        '{"statusCode":200,"reasonPhrase":"OK","headers":{"Content-Type":"application\/json"},' .
+                        '"body":"{\"success\":true}"}',
+                        json_encode($context['response'])
+                    );
+
+                    return true;
+                })
+            );
+
+        $apiClient = new Client([], $httpClientMock);
+        $apiClient->setProcessingKey('test-key');
+        $apiClient->setLogger(new PsrBridgeLogger($loggerMock));
 
         $apiClient->newClient(
             (new NewClientRequest())

@@ -38,6 +38,10 @@ $apiClient = (new Client())
 //    ->setHttpClient(new GuzzleBridgeClient($yourGuzzleClient))
 //    ->setProcessingKey('<ваш_ключ>');
 
+// Передача созданного ранее PSR-3 логгера для дампа запросов
+// и ответов от сервера (с уровнем debug)
+//$apiClient->setLogger(new PsrBridgeLogger($yourPsrLogger));
+
 try {
     $result = $apiClient->confirmTicket(
         (new ConfirmTicketRequest())

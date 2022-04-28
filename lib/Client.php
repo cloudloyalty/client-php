@@ -36,14 +36,15 @@ use CloudLoyalty\Api\Exception\ProcessingException;
 use CloudLoyalty\Api\Exception\TransportException;
 use CloudLoyalty\Api\Http\ClientInterface;
 use CloudLoyalty\Api\Http\Client\NativeClient;
+use CloudLoyalty\Api\Logger\LoggerInterface;
 use CloudLoyalty\Api\Serializer\Serializer;
 use CloudLoyalty\Api\Serializer\SerializerInterface;
 use CloudLoyalty\Api\Model\ProcessingError;
 
 class Client
 {
-    const DEFAULT_SERVER_ADDRESS = 'api.maxma.com';
-    const TEST_SERVER_ADDRESS = 'api-test.maxma.com';
+    const DEFAULT_SERVER_ADDRESS = 'https://api.maxma.com';
+    const TEST_SERVER_ADDRESS = 'https://api-test.maxma.com';
 
     const ACCEPT_LANGUAGE_RU = 'ru';
     const ACCEPT_LANGUAGE_EN = 'en';
@@ -77,6 +78,11 @@ class Client
     protected $serializer;
 
     /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * @var string
      */
     protected $serverAddress = self::DEFAULT_SERVER_ADDRESS;
@@ -95,7 +101,8 @@ class Client
     public function __construct(
         array $config = [],
         ClientInterface $httpClient = null,
-        SerializerInterface $serializer = null
+        SerializerInterface $serializer = null,
+        LoggerInterface $logger = null
     ) {
         if (isset($config['serverAddress'])) {
             $this->setServerAddress($config['serverAddress']);
@@ -114,6 +121,7 @@ class Client
             $serializer = new Serializer(self::$arrayElementsHint);
         }
         $this->serializer = $serializer;
+        $this->logger = $logger;
     }
 
     /**
@@ -131,6 +139,24 @@ class Client
     public function setHttpClient(ClientInterface $httpClient)
     {
         $this->httpClient = $httpClient;
+        return $this;
+    }
+
+    /**
+     * @return LoggerInterface
+     */
+    public function getLogger()
+    {
+        return $this->logger;
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     * @return Client
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
         return $this;
     }
 
@@ -166,7 +192,9 @@ class Client
      */
     public function setServerAddress($serverAddress)
     {
-        $this->serverAddress = trim($serverAddress, '/');
+        $scheme = parse_url($this->serverAddress, PHP_URL_SCHEME);
+        $scheme = $scheme ? $scheme . '://' : 'https://';
+        $this->serverAddress = $scheme . trim($serverAddress, '/');
         return $this;
     }
 
@@ -390,9 +418,16 @@ class Client
      */
     public function sendRawRequest($path, $rawBody)
     {
-        $response = $this->httpClient->sendRequest(
-            $this->buildRequest($path, $rawBody)
-        );
+        $request = $this->buildRequest($path, $rawBody);
+        $response = $this->httpClient->sendRequest($request);
+
+        if ($this->logger instanceof LoggerInterface) {
+            $this->logger->debug('Request', [
+                'request' => $request,
+                'response' => $response,
+            ]);
+        }
+
         return $response->getBody();
     }
 
@@ -411,7 +446,7 @@ class Client
         }
         return (new Request())
             ->setMethod('POST')
-            ->setUri('https://' . $this->serverAddress . '/' . $path)
+            ->setUri($this->serverAddress . '/' . $path)
             ->setHeaders([
                 'X-Processing-Key' => $this->processingKey,
                 'Content-Type' => 'application/json',
