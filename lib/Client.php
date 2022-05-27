@@ -31,6 +31,7 @@ use CloudLoyalty\Api\Generated\Model\V2CalculatePurchaseRequest;
 use CloudLoyalty\Api\Generated\Model\V2CalculatePurchaseResponse;
 use CloudLoyalty\Api\Generated\Model\V2SetOrderRequest;
 use CloudLoyalty\Api\Generated\Model\V2SetOrderResponse;
+use CloudLoyalty\Api\Http\Client\CurlClient;
 use CloudLoyalty\Api\Http\Request;
 use CloudLoyalty\Api\Exception\ProcessingException;
 use CloudLoyalty\Api\Exception\TransportException;
@@ -114,7 +115,9 @@ class Client
             $this->setAcceptLanguage($config['acceptLanguage']);
         }
         if ($httpClient === null) {
-            $httpClient = new NativeClient();
+            $httpClient = function_exists('curl_init')
+                ? new CurlClient()
+                : new NativeClient();
         }
         $this->httpClient = $httpClient;
         if ($serializer === null) {

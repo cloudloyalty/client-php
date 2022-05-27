@@ -88,8 +88,7 @@ class NativeClient implements ClientInterface
     {
         $joinedHeaders = [];
         foreach ($headers as $key => $value) {
-            // FIXME: should it be encoded somehow?
-            $joinedHeaders[] = $key . ': ' . $value;
+            $joinedHeaders[] = $key . ': ' . $value; // $value expected to be url-encoded
         }
         return $joinedHeaders;
     }
