@@ -22,8 +22,11 @@ class Serializer implements SerializerInterface
      */
     public function fromJson($json, $className)
     {
+        if ($json === null) {
+            return null;
+        }
         assert(class_exists($className), "Class $className must exist");
-        $a = json_decode($json, true);
+        $a = @json_decode($json, true);
         if (!is_array($a)) {
             return null;
         }
@@ -186,17 +189,17 @@ class Serializer implements SerializerInterface
             $value = $a[$fieldName];
 
             $params = $method->getParameters();
-            if ($params && $params[0]->getClass()) {
+            if ($params && ($class = $this->getParameterClass($params[0]))) {
                 // Some known classes
                 if (
-                    $params[0]->getClass()->getName() === 'DateTime'
-                    || $params[0]->getClass()->isSubclassOf('DateTime')
+                    $class->getName() === 'DateTime'
+                    || $class->isSubclassOf('DateTime')
                     // \DateTimeInterface available since 5.5
-                    || $params[0]->getClass()->implementsInterface('DateTimeInterface')
+                    || $class->implementsInterface('DateTimeInterface')
                 ) {
                     $value = new \DateTime($value);
                 } else {
-                    $classHint = $params[0]->getClass()->getName();
+                    $classHint = $class->getName();
                     $value = $this->deserializeObject($value, $classHint);
                 }
             } else {
@@ -218,5 +221,16 @@ class Serializer implements SerializerInterface
     {
         $ref = new \ReflectionClass($className);
         return $ref->getMethods(\ReflectionMethod::IS_PUBLIC);
+    }
+
+    private function getParameterClass($param)
+    {
+        // PHP 7.0+
+        if (method_exists($param, 'getType')) {
+            return $param->getType() && !$param->getType()->isBuiltin()
+                ? new \ReflectionClass($param->getType()->getName())
+                : null;
+        }
+        return $param->getClass();
     }
 }
