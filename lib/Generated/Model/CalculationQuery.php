@@ -86,6 +86,15 @@ class CalculationQuery
     protected $discountRoundStep = 0;
 
     /**
+     * Дополнительные параметры продажи.
+     * Ключи могут быть произвольными, но состоящими только из знаков `[A-z0-9_]`. Поддерживаемые типы значений: `string`, `number`, `null`.
+     *
+     *
+     * @var mixed
+     */
+    protected $extraFields;
+
+    /**
      * Данные о клиенте, для которого делается запрос.
      *
      * Делать запрос можно по номеру телефона клиента, по номеру карты или по внешнему идентификатору.
@@ -313,6 +322,33 @@ class CalculationQuery
     public function setDiscountRoundStep($discountRoundStep)
     {
         $this->discountRoundStep = $discountRoundStep;
+        return $this;
+    }
+
+    /**
+     * Дополнительные параметры продажи.
+     * Ключи могут быть произвольными, но состоящими только из знаков `[A-z0-9_]`. Поддерживаемые типы значений: `string`, `number`, `null`.
+     *
+     *
+     * @return mixed
+     */
+    public function getExtraFields()
+    {
+        return $this->extraFields;
+    }
+
+    /**
+     * Дополнительные параметры продажи.
+     * Ключи могут быть произвольными, но состоящими только из знаков `[A-z0-9_]`. Поддерживаемые типы значений: `string`, `number`, `null`.
+     *
+     *
+     * @param mixed $extraFields
+     *
+     * @return self
+     */
+    public function setExtraFields($extraFields)
+    {
+        $this->extraFields = $extraFields;
         return $this;
     }
 }

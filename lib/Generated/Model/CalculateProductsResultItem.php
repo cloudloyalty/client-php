@@ -8,17 +8,17 @@
 
 namespace CloudLoyalty\Api\Generated\Model;
 
-class CalculationResultRow
+class CalculateProductsResultItem
 {
     /**
-     * Идентификатор строки, как он передан в запросе
+     * Идентификатор товара, как он передан в запросе
      *
      * @var string
      */
     protected $id;
 
     /**
-     * Сумма всех скидок по строке
+     * Сумма всех скидок для товара
      *
      * @var float
      */
@@ -27,26 +27,26 @@ class CalculationResultRow
     /**
      * Детализация по скидкам
      *
-     * @var CalculationResultDiscounts
+     * @var CalculateProductsResultItemDiscounts
      */
     protected $discounts;
 
     /**
-     * Результат расчета бонусов для строки
+     * Результат расчета бонусов
      *
-     * @var CalculationResultRowBonuses
+     * @var CalculateProductsResultItemBonuses
      */
     protected $bonuses;
 
     /**
-     * Информация об акциях, примененных к строке
+     * Информация об акциях, примененных к товару
      *
      * @var AppliedOffer[]
      */
     protected $offers;
 
     /**
-     * Идентификатор строки, как он передан в запросе
+     * Идентификатор товара, как он передан в запросе
      *
      * @return string
      */
@@ -56,7 +56,7 @@ class CalculationResultRow
     }
 
     /**
-     * Идентификатор строки, как он передан в запросе
+     * Идентификатор товара, как он передан в запросе
      *
      * @param string $id
      *
@@ -69,7 +69,7 @@ class CalculationResultRow
     }
 
     /**
-     * Сумма всех скидок по строке
+     * Сумма всех скидок для товара
      *
      * @return float
      */
@@ -79,7 +79,7 @@ class CalculationResultRow
     }
 
     /**
-     * Сумма всех скидок по строке
+     * Сумма всех скидок для товара
      *
      * @param float $totalDiscount
      *
@@ -94,7 +94,7 @@ class CalculationResultRow
     /**
      * Детализация по скидкам
      *
-     * @return CalculationResultDiscounts
+     * @return CalculateProductsResultItemDiscounts
      */
     public function getDiscounts()
     {
@@ -104,20 +104,20 @@ class CalculationResultRow
     /**
      * Детализация по скидкам
      *
-     * @param CalculationResultDiscounts $discounts
+     * @param CalculateProductsResultItemDiscounts $discounts
      *
      * @return self
      */
-    public function setDiscounts(CalculationResultDiscounts $discounts)
+    public function setDiscounts(CalculateProductsResultItemDiscounts $discounts)
     {
         $this->discounts = $discounts;
         return $this;
     }
 
     /**
-     * Результат расчета бонусов для строки
+     * Результат расчета бонусов
      *
-     * @return CalculationResultRowBonuses
+     * @return CalculateProductsResultItemBonuses
      */
     public function getBonuses()
     {
@@ -125,20 +125,20 @@ class CalculationResultRow
     }
 
     /**
-     * Результат расчета бонусов для строки
+     * Результат расчета бонусов
      *
-     * @param CalculationResultRowBonuses $bonuses
+     * @param CalculateProductsResultItemBonuses $bonuses
      *
      * @return self
      */
-    public function setBonuses(CalculationResultRowBonuses $bonuses)
+    public function setBonuses(CalculateProductsResultItemBonuses $bonuses)
     {
         $this->bonuses = $bonuses;
         return $this;
     }
 
     /**
-     * Информация об акциях, примененных к строке
+     * Информация об акциях, примененных к товару
      *
      * @return AppliedOffer[]
      */
@@ -148,7 +148,7 @@ class CalculationResultRow
     }
 
     /**
-     * Информация об акциях, примененных к строке
+     * Информация об акциях, примененных к товару
      *
      * @param AppliedOffer[] $offers
      *
