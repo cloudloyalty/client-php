@@ -14,7 +14,7 @@ class HistoryEntryOPERATIONRECALLED
      * Акция, в рамках которой произошло списание
      *
      * В настоящий момент возможные значения:
-     * - Корректировка (ручное изменение счета из интерфейса CloudLoyaly)
+     * - Корректировка (изменение счета из интерфейса MAXMA или по API)
      *
      *
      * @var string
@@ -22,17 +22,10 @@ class HistoryEntryOPERATIONRECALLED
     protected $actionName;
 
     /**
-     * Комментарий, оставленный оператором при корректировки счета
-     *
-     * @var string
-     */
-    protected $comment;
-
-    /**
      * Акция, в рамках которой произошло списание
      *
      * В настоящий момент возможные значения:
-     * - Корректировка (ручное изменение счета из интерфейса CloudLoyaly)
+     * - Корректировка (изменение счета из интерфейса MAXMA или по API)
      *
      *
      * @return string
@@ -46,7 +39,7 @@ class HistoryEntryOPERATIONRECALLED
      * Акция, в рамках которой произошло списание
      *
      * В настоящий момент возможные значения:
-     * - Корректировка (ручное изменение счета из интерфейса CloudLoyaly)
+     * - Корректировка (изменение счета из интерфейса MAXMA или по API)
      *
      *
      * @param string $actionName
@@ -56,29 +49,6 @@ class HistoryEntryOPERATIONRECALLED
     public function setActionName($actionName)
     {
         $this->actionName = $actionName;
-        return $this;
-    }
-
-    /**
-     * Комментарий, оставленный оператором при корректировки счета
-     *
-     * @return string
-     */
-    public function getComment()
-    {
-        return $this->comment;
-    }
-
-    /**
-     * Комментарий, оставленный оператором при корректировки счета
-     *
-     * @param string $comment
-     *
-     * @return self
-     */
-    public function setComment($comment)
-    {
-        $this->comment = $comment;
         return $this;
     }
 }

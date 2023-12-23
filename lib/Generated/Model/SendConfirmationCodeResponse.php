@@ -28,6 +28,13 @@ class SendConfirmationCodeResponse
     protected $msgid;
 
     /**
+     * Канал отправки кода
+     *
+     * @var string
+     */
+    protected $channel;
+
+    /**
      * Дата и время, до которых высланный код считается действующим.
      *
      * После наступления указанного времени кодом воспользоваться уже будет нельзя.
@@ -86,6 +93,29 @@ class SendConfirmationCodeResponse
     public function setMsgid($msgid)
     {
         $this->msgid = $msgid;
+        return $this;
+    }
+
+    /**
+     * Канал отправки кода
+     *
+     * @return string
+     */
+    public function getChannel()
+    {
+        return $this->channel;
+    }
+
+    /**
+     * Канал отправки кода
+     *
+     * @param string $channel
+     *
+     * @return self
+     */
+    public function setChannel($channel)
+    {
+        $this->channel = $channel;
         return $this;
     }
 

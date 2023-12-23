@@ -6,6 +6,8 @@ use CloudLoyalty\Api\Generated\Model\AdjustBalanceRequest;
 use CloudLoyalty\Api\Generated\Model\AdjustBalanceResponse;
 use CloudLoyalty\Api\Generated\Model\ApplyReturnRequest;
 use CloudLoyalty\Api\Generated\Model\ApplyReturnResponse;
+use CloudLoyalty\Api\Generated\Model\CalculateProductsRequest;
+use CloudLoyalty\Api\Generated\Model\CalculateProductsResult;
 use CloudLoyalty\Api\Generated\Model\GetHistoryRequest;
 use CloudLoyalty\Api\Generated\Model\GetHistoryResponse;
 use CloudLoyalty\Api\Generated\Model\GetSettingsRequest;
@@ -66,6 +68,22 @@ class Client
         'CloudLoyalty\Api\Generated\Model\NewClientResponse' => [
             'bonuses' => 'CloudLoyalty\Api\Generated\Model\ClientBonusExpirationItem'
         ],
+        'CloudLoyalty\Api\Generated\Model\CalculateProductsResult' => [
+            'products' => 'CloudLoyalty\Api\Generated\Model\CalculateProductsResultItem'
+        ],
+        'CloudLoyalty\Api\Generated\Model\CalculateProductsResultItem' => [
+            'offers' => 'CloudLoyalty\Api\Generated\Model\AppliedOffer'
+        ],
+        // @todo: breaking backward compatibility
+        //'CloudLoyalty\Api\Generated\Model\GetHistoryResponse' => [
+        //    'history' => 'CloudLoyalty\Api\Generated\Model\HistoryEntry'
+        //],
+        //'CloudLoyalty\Api\Generated\Model\GetSettingsResponse' => [
+        //    'clientExtraFields' => 'CloudLoyalty\Api\Generated\Model\GetSettingsResponseClientExtraFieldsItem'
+        //],
+        //'CloudLoyalty\Api\Generated\Model\SetPurchaseResponse' => [
+        //    'receiptInfo' => 'CloudLoyalty\Api\Generated\Model\SetPurchaseResponseReceiptInfoItem'
+        //],
     ];
 
     /**
@@ -395,6 +413,17 @@ class Client
     public function getSettings(GetSettingsRequest $request)
     {
         return $this->call('get-settings', $request, 'CloudLoyalty\Api\Generated\Model\GetSettingsResponse');
+    }
+
+    /**
+     * @param CalculateProductsRequest $request
+     * @return CalculateProductsResult
+     * @throws ProcessingException
+     * @throws TransportException
+     */
+    public function calculateProducts(CalculateProductsRequest $request)
+    {
+        return $this->call('calculate-products', $request, 'CloudLoyalty\Api\Generated\Model\CalculateProductsResult');
     }
 
     /**

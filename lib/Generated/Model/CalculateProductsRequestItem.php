@@ -8,7 +8,7 @@
 
 namespace CloudLoyalty\Api\Generated\Model;
 
-class CalculationQueryRow
+class CalculateProductsRequestItem
 {
     /**
      * Произвольный идентификатор строки, сервером не используется
@@ -32,49 +32,30 @@ class CalculationQueryRow
     protected $qty;
 
     /**
-     * Автоскидка, примененная к строке
+     * Скидка, уже примененная к товару вне MAXMA.
+     * Учитывается при расчете максимальной скидки, может использоваться для полного запрета прочих скидок.
+     *
      *
      * @var float
      */
-    protected $autoDiscount = 0;
+    protected $externalDiscount = 0;
 
     /**
-     * Ручная скидка, примененная к строке
-     *
-     * @var float
-     */
-    protected $manualDiscount = 0;
-
-    /**
-     * Запрет применения бонусов к этой строке
-     *
-     * @var bool
-     */
-    protected $noApplyBonuses = false;
-
-    /**
-     * Запрет начисления бонусов за эту строку
+     * Запрет начисления бонусов за этот товар
      *
      * @var bool
      */
     protected $noCollectBonuses = false;
 
     /**
-     * Запрет применения скидки по промокоду к этой строке
-     *
-     * @var bool
-     */
-    protected $noPromocode = false;
-
-    /**
-     * Запрет применения акций к этой строке
+     * Запрет применения акций к этому товару
      *
      * @var bool
      */
     protected $noOffer = false;
 
     /**
-     * Величина максимальной скидки для этой строки
+     * Величина максимальной скидки для этого товара
      *
      * @var float
      */
@@ -150,76 +131,34 @@ class CalculationQueryRow
     }
 
     /**
-     * Автоскидка, примененная к строке
+     * Скидка, уже примененная к товару вне MAXMA.
+     * Учитывается при расчете максимальной скидки, может использоваться для полного запрета прочих скидок.
+     *
      *
      * @return float
      */
-    public function getAutoDiscount()
+    public function getExternalDiscount()
     {
-        return $this->autoDiscount;
+        return $this->externalDiscount;
     }
 
     /**
-     * Автоскидка, примененная к строке
+     * Скидка, уже примененная к товару вне MAXMA.
+     * Учитывается при расчете максимальной скидки, может использоваться для полного запрета прочих скидок.
      *
-     * @param float $autoDiscount
+     *
+     * @param float $externalDiscount
      *
      * @return self
      */
-    public function setAutoDiscount($autoDiscount)
+    public function setExternalDiscount($externalDiscount)
     {
-        $this->autoDiscount = $autoDiscount;
+        $this->externalDiscount = $externalDiscount;
         return $this;
     }
 
     /**
-     * Ручная скидка, примененная к строке
-     *
-     * @return float
-     */
-    public function getManualDiscount()
-    {
-        return $this->manualDiscount;
-    }
-
-    /**
-     * Ручная скидка, примененная к строке
-     *
-     * @param float $manualDiscount
-     *
-     * @return self
-     */
-    public function setManualDiscount($manualDiscount)
-    {
-        $this->manualDiscount = $manualDiscount;
-        return $this;
-    }
-
-    /**
-     * Запрет применения бонусов к этой строке
-     *
-     * @return bool
-     */
-    public function getNoApplyBonuses()
-    {
-        return $this->noApplyBonuses;
-    }
-
-    /**
-     * Запрет применения бонусов к этой строке
-     *
-     * @param bool $noApplyBonuses
-     *
-     * @return self
-     */
-    public function setNoApplyBonuses($noApplyBonuses)
-    {
-        $this->noApplyBonuses = $noApplyBonuses;
-        return $this;
-    }
-
-    /**
-     * Запрет начисления бонусов за эту строку
+     * Запрет начисления бонусов за этот товар
      *
      * @return bool
      */
@@ -229,7 +168,7 @@ class CalculationQueryRow
     }
 
     /**
-     * Запрет начисления бонусов за эту строку
+     * Запрет начисления бонусов за этот товар
      *
      * @param bool $noCollectBonuses
      *
@@ -242,30 +181,7 @@ class CalculationQueryRow
     }
 
     /**
-     * Запрет применения скидки по промокоду к этой строке
-     *
-     * @return bool
-     */
-    public function getNoPromocode()
-    {
-        return $this->noPromocode;
-    }
-
-    /**
-     * Запрет применения скидки по промокоду к этой строке
-     *
-     * @param bool $noPromocode
-     *
-     * @return self
-     */
-    public function setNoPromocode($noPromocode)
-    {
-        $this->noPromocode = $noPromocode;
-        return $this;
-    }
-
-    /**
-     * Запрет применения акций к этой строке
+     * Запрет применения акций к этому товару
      *
      * @return bool
      */
@@ -275,7 +191,7 @@ class CalculationQueryRow
     }
 
     /**
-     * Запрет применения акций к этой строке
+     * Запрет применения акций к этому товару
      *
      * @param bool $noOffer
      *
@@ -288,7 +204,7 @@ class CalculationQueryRow
     }
 
     /**
-     * Величина максимальной скидки для этой строки
+     * Величина максимальной скидки для этого товара
      *
      * @return float
      */
@@ -298,7 +214,7 @@ class CalculationQueryRow
     }
 
     /**
-     * Величина максимальной скидки для этой строки
+     * Величина максимальной скидки для этого товара
      *
      * @param float $maxDiscount
      *

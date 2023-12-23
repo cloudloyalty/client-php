@@ -5,10 +5,20 @@ namespace Tests;
 use CloudLoyalty\Api\Client;
 use CloudLoyalty\Api\Exception\ProcessingException;
 use CloudLoyalty\Api\Exception\TransportException;
+use CloudLoyalty\Api\Generated\Model\AppliedOffer;
+use CloudLoyalty\Api\Generated\Model\CalculateProductsRequest;
+use CloudLoyalty\Api\Generated\Model\CalculateProductsRequestItem;
+use CloudLoyalty\Api\Generated\Model\CalculateProductsResult;
+use CloudLoyalty\Api\Generated\Model\CalculateProductsResultItem;
+use CloudLoyalty\Api\Generated\Model\CalculateProductsResultItemBonuses;
+use CloudLoyalty\Api\Generated\Model\CalculateProductsResultItemDiscounts;
 use CloudLoyalty\Api\Generated\Model\ClientInfoQuery;
 use CloudLoyalty\Api\Generated\Model\ClientInfoReply;
+use CloudLoyalty\Api\Generated\Model\ClientQuery;
 use CloudLoyalty\Api\Generated\Model\NewClientRequest;
 use CloudLoyalty\Api\Generated\Model\NewClientResponse;
+use CloudLoyalty\Api\Generated\Model\Product;
+use CloudLoyalty\Api\Generated\Model\ShopQuery;
 use CloudLoyalty\Api\Http\Request;
 use CloudLoyalty\Api\Http\Response;
 use CloudLoyalty\Api\Logger\PsrBridgeLogger;
@@ -206,6 +216,82 @@ class ClientTest extends TestCase
                     (new ClientInfoQuery())
                         ->setName('Name')
                 )
+        );
+    }
+
+    public function testCalculateProducts()
+    {
+        $httpClientMock = $this->createMock('CloudLoyalty\Api\Http\Client\NativeClient');
+
+        $httpClientMock->expects($this->once())
+            ->method('sendRequest')
+            ->with($this->equalTo(
+                (new Request())
+                    ->setMethod('POST')
+                    ->setUri('https://api.maxma.com/calculate-products')
+                    ->setHeaders([
+                        'Content-Type' => 'application/json',
+                        'Accept' => 'application/json',
+                        'X-Processing-Key' => 'test-key',
+                        'Accept-Language' => 'ru'
+                    ])
+                    ->setBody('{"client":{"phoneNumber":"+79990000000"},"shop":{"code":"shop1","name":"Shop 1"},' .
+                        '"products":[{"product":{"externalId":"external-id","blackPrice":400,"minPrice":0,"vatPercent":0},' .
+                        '"externalDiscount":0,"noCollectBonuses":false,"noOffer":false}],"discountRoundStep":0}')
+            ))
+            ->willReturn(
+                (new Response())
+                    ->setStatusCode(200)
+                    ->setReasonPhrase('OK')
+                    ->setHeaders(['Content-Type' => 'application/json'])
+                    ->setBody('{"products":[{"bonuses":{"collected":200},"discounts":{"offer":300},' .
+                        '"offers":[{"name":"Offer1","amount":300,"expireAt":"2023-12-20T16:00:00+03:00"}]}]}')
+            );
+
+        $apiClient = new Client([], $httpClientMock);
+        $apiClient->setProcessingKey('test-key');
+
+        $response = $apiClient->calculateProducts(
+            (new CalculateProductsRequest())
+                ->setClient(
+                    (new ClientQuery())
+                        ->setPhoneNumber('+79990000000')
+                )
+                ->setShop(
+                    (new ShopQuery())
+                        ->setCode('shop1')
+                        ->setName('Shop 1')
+                )
+                ->setProducts([
+                    (new CalculateProductsRequestItem())
+                        ->setProduct(
+                            (new Product())
+                                ->setExternalId('external-id')
+                                ->setBlackPrice(400)
+                        )
+                ])
+        );
+
+        $this->assertEquals(
+            (new CalculateProductsResult())
+                ->setProducts([
+                    (new CalculateProductsResultItem())
+                        ->setBonuses(
+                            (new CalculateProductsResultItemBonuses())
+                                ->setCollected(200)
+                        )
+                        ->setDiscounts(
+                            (new CalculateProductsResultItemDiscounts())
+                                ->setOffer(300)
+                        )
+                        ->setOffers([
+                            (new AppliedOffer())
+                                ->setName('Offer1')
+                                ->setAmount(300)
+                                ->setExpireAt(new \DateTime('2023-12-20T16:00:00+03:00'))
+                        ])
+                ]),
+            $response
         );
     }
 }
