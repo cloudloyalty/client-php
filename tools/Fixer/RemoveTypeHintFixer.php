@@ -72,10 +72,10 @@ class RemoveTypeHintFixer implements FixerInterface
             foreach ($arguments as $argumentInfo) {
                 $ta = $argumentInfo->getTypeAnalysis();
                 if ($ta) {
-                    // Remove ?
                     if ($ta->isNullable()) {
-                        $tokens->removeTrailingWhitespace($ta->getStartIndex());
-                        $tokens->clearTokenAndMergeSurroundingWhitespace($ta->getStartIndex());
+                        // These lines will remove ? nullable type definition
+                        //$tokens->removeTrailingWhitespace($ta->getStartIndex());
+                        //$tokens->clearTokenAndMergeSurroundingWhitespace($ta->getStartIndex());
                         $defaultNullUntilEnd = true;
                     }
 

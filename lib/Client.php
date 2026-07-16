@@ -146,9 +146,9 @@ class Client
 
     public function __construct(
         array $config = [],
-        ClientInterface $httpClient = null,
-        SerializerInterface $serializer = null,
-        LoggerInterface $logger = null
+        ?ClientInterface $httpClient = null,
+        ?SerializerInterface $serializer = null,
+        ?LoggerInterface $logger = null
     ) {
         if (isset($config['serverAddress'])) {
             $this->setServerAddress($config['serverAddress']);

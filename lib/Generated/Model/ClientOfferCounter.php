@@ -32,7 +32,7 @@ class ClientOfferCounter
     protected $targetValue;
 
     /**
-     * Дата, до которой нужно накопить счетчик
+     * Дата, до которой нужно накопить счетчик. Поле не возвращается, если срок не задан.
      *
      * @var \DateTime|null
      */
@@ -115,7 +115,7 @@ class ClientOfferCounter
     }
 
     /**
-     * Дата, до которой нужно накопить счетчик
+     * Дата, до которой нужно накопить счетчик. Поле не возвращается, если срок не задан.
      *
      * @return \DateTime|null
      */
@@ -125,13 +125,13 @@ class ClientOfferCounter
     }
 
     /**
-     * Дата, до которой нужно накопить счетчик
+     * Дата, до которой нужно накопить счетчик. Поле не возвращается, если срок не задан.
      *
      * @param \DateTime|null $targetDate
      *
      * @return self
      */
-    public function setTargetDate(\DateTime $targetDate = null)
+    public function setTargetDate(?\DateTime $targetDate = null)
     {
         $this->targetDate = $targetDate;
         return $this;
