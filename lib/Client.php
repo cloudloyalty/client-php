@@ -77,7 +77,8 @@ class Client
             'children' => 'CloudLoyalty\Api\Generated\Model\ClientInfoReplyChildrenItem'
         ],
         'CloudLoyalty\Api\Generated\Model\GetBalanceResponse' => [
-            'bonuses' => 'CloudLoyalty\Api\Generated\Model\ClientBonusExpirationItem'
+            'bonuses' => 'CloudLoyalty\Api\Generated\Model\ClientBonusExpirationItem',
+            'pendingBonuses' => 'CloudLoyalty\Api\Generated\Model\ClientPendingBonusActivationItem'
         ],
         'CloudLoyalty\Api\Generated\Model\GetClientOffersResponse' => [
             'counters' => 'CloudLoyalty\Api\Generated\Model\ClientOfferCounter'

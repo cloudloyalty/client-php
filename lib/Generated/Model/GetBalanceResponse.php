@@ -35,6 +35,19 @@ class GetBalanceResponse
     protected $bonuses;
 
     /**
+     * Детализация ожидаемых бонусов по датам активации, в порядке возрастания даты.
+     *
+     * Возвращается, только если у клиента есть ожидаемые бонусы.
+     *
+     * Сумма `amount` может ненадолго отличаться от `client.pendingBonuses`: детализация рассчитывается
+     * на момент запроса, а баланс клиента обновляется периодически после наступления даты активации.
+     *
+     *
+     * @var ClientPendingBonusActivationItem[]
+     */
+    protected $pendingBonuses;
+
+    /**
      * Информация об уровне клиента
      *
      * @var ClientLevel
@@ -113,6 +126,41 @@ class GetBalanceResponse
     public function setBonuses(array $bonuses)
     {
         $this->bonuses = $bonuses;
+        return $this;
+    }
+
+    /**
+     * Детализация ожидаемых бонусов по датам активации, в порядке возрастания даты.
+     *
+     * Возвращается, только если у клиента есть ожидаемые бонусы.
+     *
+     * Сумма `amount` может ненадолго отличаться от `client.pendingBonuses`: детализация рассчитывается
+     * на момент запроса, а баланс клиента обновляется периодически после наступления даты активации.
+     *
+     *
+     * @return ClientPendingBonusActivationItem[]
+     */
+    public function getPendingBonuses()
+    {
+        return $this->pendingBonuses;
+    }
+
+    /**
+     * Детализация ожидаемых бонусов по датам активации, в порядке возрастания даты.
+     *
+     * Возвращается, только если у клиента есть ожидаемые бонусы.
+     *
+     * Сумма `amount` может ненадолго отличаться от `client.pendingBonuses`: детализация рассчитывается
+     * на момент запроса, а баланс клиента обновляется периодически после наступления даты активации.
+     *
+     *
+     * @param ClientPendingBonusActivationItem[] $pendingBonuses
+     *
+     * @return self
+     */
+    public function setPendingBonuses(array $pendingBonuses)
+    {
+        $this->pendingBonuses = $pendingBonuses;
         return $this;
     }
 
